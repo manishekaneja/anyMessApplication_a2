@@ -1,0 +1,30 @@
+#myform{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: lightblue;
+    overflow: hidden;
+ padding: 20px;
+ margin-bottom: 10px;
+     
+    
+}
+.box{
+    text-align: center!important;
+    margin-top:3px;
+    margin-bottom:3px;
+    
+    padding: 3px;
+}
+.red{
+    border-left: 5px solid #a94442; /* red */
+}
+.green{
+    border-left: 5px solid #42A948; /* green */
+}
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }
+
