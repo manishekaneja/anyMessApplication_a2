@@ -1,0 +1,25 @@
+.navbar-right li a{
+    color:white!important;
+    transition: 0.5s;
+}
+.navbar-right li a:hover{
+    font-weight: 700;
+    text-shadow: black 0px 0px 10px;
+    color: lightcoral!important;
+    transition: 0.5s;
+ }
+.logo{
+    font-size: 18px;
+    font-weight: 900;
+    text-shadow: black 0px 0px 10px;
+    color: lightcoral!important;
+    transition: 0.5s;
+    margin: 0px 50px!important;
+
+}
+.logo:hover{
+    text-decoration:none;
+    font-weight: 700;
+    text-shadow: black 0px 0px 20px;
+    
+}

@@ -28,7 +28,7 @@ export class AjaxCallService {
 
   }
 
-  doLogin(data: Login): void {
+doLogin(data: Login): void {
     var res: any = JSON.parse(this.readJson(data.username, data.password));
     if (res.valid) {
       localStorage.tokenID = res.tokenID;
