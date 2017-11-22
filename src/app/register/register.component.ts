@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Register } from '../jsons/RegisterClass';
+import { DataBlock } from '../jsons/DataClasses';
 import { AjaxCallService } from '../ajax-call.service';
 import { FormControl } from '@angular/forms';
 @Component({
@@ -9,8 +9,8 @@ import { FormControl } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   invalidAttempt = false;
-
-  data = new Register("", "", "", "", "");
+  registered=false; 
+  data = new DataBlock("", "", "", "", "");
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {
@@ -20,8 +20,13 @@ export class RegisterComponent implements OnInit {
     }
   }
   doRegister(): void {
-    if (this.ajaxCall.doRegister(this.data) && this.ajaxCall.loggedInUser) {
-      console.log("redirect to loggin Page");
+    if(this.ajaxCall.doRegister(this.data)){
+      this.registered=true;
+      this.invalidAttempt=false;
+    }
+    else{
+      this.registered=false;
+      this.invalidAttempt=true;
     }
   }
 }

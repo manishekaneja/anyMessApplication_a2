@@ -1,13 +1,11 @@
-import { Pipe, PipeTransform,OnChanges } from '@angular/core';
-import { Message } from './jsons/MessageClass'
+import { Pipe, PipeTransform } from '@angular/core';
+import { Message } from './jsons/DataClasses'
 
 @Pipe({
   name: 'getFav'
 })
-export class GetFavPipe implements PipeTransform ,OnChanges {
+export class GetFavPipe implements PipeTransform  {
 
-  ngOnChanges(){
-  }
   transform(data:Message[]): Message[] {
     return data.filter(my=>my.fav);
   }

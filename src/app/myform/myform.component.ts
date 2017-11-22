@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { AjaxCallService } from '../ajax-call.service';
-import { Login } from '../jsons/LoginClass';
+import { DataBlock } from '../jsons/DataClasses';
 @Component({
   selector: 'app-myform',
   templateUrl: './myform.component.html',
   styleUrls: ['./myform.component.css'],
 })
 export class MyformComponent {
-  data = new Login("", "");
+  data = new DataBlock("", "");
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {

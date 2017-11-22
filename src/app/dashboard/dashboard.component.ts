@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from '../jsons/MessageClass';
+import { Message } from '../jsons/DataClasses';
+import { AjaxCallService } from '../ajax-call.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +9,10 @@ import { Message } from '../jsons/MessageClass';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
-  myArr:Message[] = [new Message('xy', false), new Message('yz',true), new Message('zx',false)];
-  username:string = "Manish";
-  show() {
-    console.log(this.myArr);
-  }
+  details: any;
+  constructor(private ajax: AjaxCallService) { }
   ngOnInit() {
+    this.details = this.ajax.getData(localStorage.tokenID);
+    console.log(this.details.messages);
   }
-
 }

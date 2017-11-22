@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from '../jsons/LoginClass';
+import { DataBlock } from '../jsons/DataClasses';
 import { AjaxCallService } from '../ajax-call.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AjaxCallService } from '../ajax-call.service';
 })
 export class LoginComponent implements OnInit {
 
-  data = new Login("", "");
+  data = new DataBlock("", "");
   invalidAttempt=false;
   constructor(public ajaxCall: AjaxCallService) {
   }

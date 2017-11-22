@@ -34,3 +34,18 @@
      opacity: 0;
     -webkit-transition: all .5s;
   }
+  .red{
+    color: rgb(165, 5, 5);
+    text-shadow:white 0px 0px 2px;
+  }
+  .bold{
+    font-weight: 900;
+    display: block;
+    text-align: center;
+  }
+  .link{
+    color:rgb(71, 71, 247);
+  }
+  .link:hover{
+    text-decoration: underline;
+  }

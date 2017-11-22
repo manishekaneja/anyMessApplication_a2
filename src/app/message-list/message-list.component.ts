@@ -1,22 +1,13 @@
-import { Component, OnChanges,Input } from '@angular/core';
-import { Message} from '../jsons/MessageClass';
-import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, Input } from '@angular/core';
+import { Message } from '../jsons/DataClasses';
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css']
 })
-export class MessageListComponent implements OnChanges {
+export class MessageListComponent {
 
   constructor() { }
-  @Input() myList:Message[];
-  
-  ngOnInit(){
-  }
-  ngOnChanges(changes:SimpleChanges) {
-    // console.log(changes.myList.currentValue);
-    // this.myList=changes.myList.currentValue;
-    
-  }
+  @Input() myList: Message[];
 
 }

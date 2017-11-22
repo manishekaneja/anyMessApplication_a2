@@ -21,3 +21,10 @@ button.myclose {
 .clicked{
     opacity: 0.8!important;
 }
+button{
+    transition: 0.5s;
+}
+button:disabled{
+opacity: 0;
+transition: 0.5s;
+}

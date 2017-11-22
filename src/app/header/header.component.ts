@@ -8,15 +8,16 @@ import { AjaxCallService } from '../ajax-call.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public ajax:AjaxCallService) { }
-  removeId(){
-    this.ajax.loggedInUser=null;
-    if(localStorage.tokenID){
+  constructor(public ajax: AjaxCallService) { }
+  removeId() {
+    this.ajax.loggedInUser = null;
+    if (localStorage.tokenID) {
       localStorage.clear();
     }
   }
 
   ngOnInit() {
+    this.ajax.preCheck();
   }
 
 }

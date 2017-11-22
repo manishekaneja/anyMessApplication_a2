@@ -1,6 +1,10 @@
 <div class=" message alert alert-danger  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="invalidAttempt" style="text-align:center"
   role="alert">
-  <strong>Either Username is unavilable or details were invalid </strong>
+  <strong>Either Username is unavilable or details are not valid </strong>
+</div>
+<div class=" message alert alert-success  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="registered" style="text-align:center"
+role="alert">
+<strong>Your Account has been registerd, Login to Access your Account </strong>
 </div>
 <form #myform="ngForm" class="form-horizontal col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
   <div class="form-group box">

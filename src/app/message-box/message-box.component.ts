@@ -1,5 +1,6 @@
 import { Component, Input, Output,EventEmitter } from '@angular/core';
-import { Message } from '../jsons/MessageClass'
+import { Message } from '../jsons/DataClasses'
+import { AjaxCallService } from '../ajax-call.service';
 
 @Component({
   selector: 'app-message-box',
@@ -12,8 +13,13 @@ export class MessageBoxComponent {
   ngOnInit() {
 console.log("init");    
   }
+  constructor(private ajax:AjaxCallService){}
   toggleFav() {
-    this.data.fav=!this.data.fav;
+      this.ajax.updateMessage(localStorage.tokenID,this.data);
+  }
+  removeMess(){
+    this.ajax.deleteMessage(localStorage.tokenID,this.data);
+
   }
 }
 
