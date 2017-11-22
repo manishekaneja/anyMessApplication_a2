@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from '../jsons/LoginClass';
+import { Register } from '../jsons/RegisterClass';
 import { AjaxCallService } from '../ajax-call.service';
-
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css', '../jsons/validation.css']
 })
 export class RegisterComponent implements OnInit {
+  invalidAttempt = false;
 
-  data = new Login("", "");
+  data = new Register("", "", "", "", "");
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {
@@ -18,12 +19,11 @@ export class RegisterComponent implements OnInit {
       console.log("redirect to loggin Page");
     }
   }
-  doLogin(): void {
-    this.ajaxCall.doLogin(this.data);
-    if (this.ajaxCall.loggedInUser) {
+  doRegister(): void {
+    if (this.ajaxCall.doRegister(this.data) && this.ajaxCall.loggedInUser) {
       console.log("redirect to loggin Page");
     }
-
   }
-
 }
+
+

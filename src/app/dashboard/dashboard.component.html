@@ -1,3 +1,43 @@
-<p>
-  dashboard works!
-</p>
+<div id="container">
+  <div class="container col-sm-12" style="background-color: lightgrey;height:200px;">
+    <div id="userinfo" style="margin:10px">
+      <div class="figure" style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
+        <img src="" alt="nf">
+      </div>
+      <div class="text" style="display:block;text-align: center;font-weight:700;">
+        {{username}} </div>
+      <div class="text" style="display:block;text-align: center;font-weight:700;">
+        Messages:{{myArr.length}}
+      </div>
+
+    </div>
+  </div>
+  <div class="container col-sm-12" style="background-color: white;padding:50px;margin-top:10px;">
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills nav-justified" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#message" aria-controls="home" role="tab" data-toggle="tab">Received</a>
+      </li>
+      <li role="presentation">
+        <a href="#fav" aria-controls="messages" role="tab" data-toggle="tab">Favorites</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content scroll-box" style="height:400px;overflow-y:scroll;">
+      <div role="tabpanel" class="tab-pane active" id="message">
+        <app-message-list [myList]="myArr"></app-message-list>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="fav">
+        <app-message-list [myList]="myArr|getFav"></app-message-list>
+        
+       
+
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<button (click)="show()">show</button>

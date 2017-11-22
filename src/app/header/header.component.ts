@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AjaxCallService } from '../ajax-call.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public ajax:AjaxCallService) { }
+  removeId(){
+    this.ajax.loggedInUser=null;
+    if(localStorage.tokenID){
+      localStorage.clear();
+    }
+  }
 
   ngOnInit() {
   }

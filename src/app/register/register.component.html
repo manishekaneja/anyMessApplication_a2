@@ -1,34 +1,68 @@
-<form #myform class="form-horizontal col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    <div class="form-group box">
-      <h2>REgister Panel</h2>
+<div class=" message alert alert-danger  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="invalidAttempt" style="text-align:center"
+  role="alert">
+  <strong>Either Username is unavilable or details were invalid </strong>
+</div>
+<form #myform="ngForm" class="form-horizontal col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div class="form-group box">
+    <h2>Register Panel</h2>
+
+  </div>
+  <div class="form-group">
+    <label for="fullName" class="col-sm-3 control-label">Enter Full Name</label>
+    <div class="col-sm-9">
+      <input type="text" id="fullName" name="fullName" class="form-control" required placeholder="Enter your Full Name here" required
+        [(ngModel)]="data.fullName" #username="ngModel">
     </div>
-    <div class="form-group">
-      <label for="username" class="col-sm-3 control-label">Enter email</label>
-      <div class="col-sm-9">
-        <input type="text" id="username" name="username" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-          placeholder="Enter Email here" required minlength="4" [(ngModel)]="data.username" #username="ngModel">
-        <span>*
-          <span style="font-size:10px;"> Enter a valid e-mail address</span>
-        </span>
-      </div>
-  
+
+  </div>
+  <div class="form-group">
+    <label for="username" class="col-sm-3 control-label">Enter Username</label>
+    <div class="col-sm-9">
+      <input type="text" id="username" name="username" class="form-control" required placeholder="Enter Username here" required
+        [(ngModel)]="data.username" #username="ngModel">
+      <span>*
+        <span style="font-size:10px;"> Enter a unique username</span>
+      </span>
     </div>
-    <div class="form-group">
-      <label for="password" class="col-sm-3 control-label">Enter Password</label>
-      <div class="col-sm-9">
-        <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password here" required minlength="8"
-          maxlength="16" [(ngModel)]="data.password" #password="ngModel">
-        <span>*
-          <span style="font-size:10px;"> Only 8-16 characters are allowed</span>
-        </span>
-      </div>
+
+  </div>
+  <div class="form-group">
+    <label for="email" class="col-sm-3 control-label">Enter email</label>
+    <div class="col-sm-9">
+      <input type="text" id="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+        placeholder="Enter Email here" required [(ngModel)]="data.email" #username="ngModel">
+      <span>*
+        <span style="font-size:10px;"> Enter a valid e-mail address</span>
+      </span>
     </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary col-sm-12" style="width:100%;height:100%;" (click)="doLogin()">Submit</button>
+
+  </div>
+  <div class="form-group">
+    <label for="password" class="col-sm-3 control-label">Enter Password</label>
+    <div class="col-sm-9">
+      <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password here" required minlength="4"
+        maxlength="16" [(ngModel)]="data.password" #password="ngModel">
+      <span>*
+        <span style="font-size:10px;"> Only 4-16 characters are allowed</span>
+      </span>
     </div>
-    <div class="form-group" style="text-align:center">
-        <a routerLink="/account/login">Login</a>
-        
+  </div>
+  <div class="form-group">
+    <label for="cpassword" class="col-sm-3 control-label">Confirm Password</label>
+    <div class="col-sm-9">
+      <input type="password" name="cpassword" id="cpassword" class="form-control" placeholder="Re-enter Password here" required  maxlength="16" [(ngModel)]="data.cpassword" #cpassword="ngModel">
     </div>
-  </form>
-  
+  </div>
+  <div class="form-group">
+    <button type="submit" [disabled]="!myform.form.valid" class="btn btn-primary col-sm-12" style="width:100%;height:100%;" (click)="doRegister()">Submit</button>
+    <span>*
+      <span style="font-size:10px;"> All fields are mandatory</span>
+    </span>
+  </div>
+  <div class="form-group" style="text-align:center">
+    <a routerLink="/account/login">
+      <button class="btn btn-default col-xs-12" style="overflow:hidden;color:darkblue;font-weight:900">
+        Login </button>
+    </a>
+  </div>
+</form>

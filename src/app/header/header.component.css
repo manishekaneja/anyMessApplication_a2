@@ -1,8 +1,11 @@
 .navbar-right li a{
     color:white!important;
     transition: 0.5s;
+    margin: auto 5px;
+    
 }
 .navbar-right li a:hover{
+    margin: auto 5px;
     font-weight: 700;
     text-shadow: black 0px 0px 10px;
     color: lightcoral!important;
@@ -23,3 +26,5 @@
     text-shadow: black 0px 0px 20px;
     
 }
+.point{
+cursor:pointer;}

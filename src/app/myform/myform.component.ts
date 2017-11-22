@@ -6,7 +6,6 @@ import { Login } from '../jsons/LoginClass';
   selector: 'app-myform',
   templateUrl: './myform.component.html',
   styleUrls: ['./myform.component.css'],
-  providers: [AjaxCallService]
 })
 export class MyformComponent {
   data = new Login("", "");

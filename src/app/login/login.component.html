@@ -1,12 +1,18 @@
-<form #myform class="form-horizontal col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<div class=" message alert alert-danger  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="invalidAttempt" style="text-align:center"
+  role="alert">
+
+  <strong>Invalid Email or Password </strong>
+
+</div>
+<form #myform="ngForm" class="form-horizontal col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
   <div class="form-group box">
     <h2>Login Panel</h2>
   </div>
   <div class="form-group">
-    <label for="username" class="col-sm-3 control-label">Enter email</label>
+    <label for="email" class="col-sm-3 control-label">Enter email</label>
     <div class="col-sm-9">
-      <input type="text" id="username" name="username" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-        placeholder="Enter Email here" required minlength="4" [(ngModel)]="data.username" #username="ngModel">
+      <input type="text" id="email" name="email" class="form-control" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+        placeholder="Enter Email here" required minlength="4" [(ngModel)]="data.email" #email="ngModel">
       <span>*
         <span style="font-size:10px;"> Enter a valid e-mail address</span>
       </span>
@@ -16,18 +22,21 @@
   <div class="form-group">
     <label for="password" class="col-sm-3 control-label">Enter Password</label>
     <div class="col-sm-9">
-      <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password here" required minlength="8"
+      <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password here" required minlength="4"
         maxlength="16" [(ngModel)]="data.password" #password="ngModel">
       <span>*
-        <span style="font-size:10px;"> Only 8-16 characters are allowed</span>
+        <span style="font-size:10px;"> Only 4-16 characters are allowed</span>
       </span>
     </div>
   </div>
   <div class="form-group">
-    <button type="submit" class="btn btn-primary col-sm-12" style="width:100%;height:100%;" (click)="doLogin()">Submit</button>
+    <button [disabled]="!myform.form.valid" class="btn btn-primary col-sm-12" style="width:100%;height:100%;" (click)="doLogin()">Login</button>
   </div>
   <div class="form-group" style="text-align:center">
-      <a routerLink="/account/register">Register</a>
-      
+    <a routerLink="/account/register">
+      <button class="btn btn-default col-xs-12" style="overflow:hidden;color:darkblue;font-weight:900">
+        Register
+      </button>
+    </a>
   </div>
 </form>

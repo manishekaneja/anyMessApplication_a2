@@ -10,7 +10,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="logo navbar-brand " routerLink="/home" >MessageME</a>
+        <a class="logo navbar-brand " routerLink="/home">MessageME</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,8 +19,14 @@
           <li>
             <a routerLink="/home">Home</a>
           </li>
-          <li>
-            <a routerLink="/account/login">Login</a>
+          <li *ngIf="!this.ajax.loggedInUser">
+            <a routerLink="/account/login">Account</a>
+          </li>
+          <li *ngIf="this.ajax.loggedInUser">
+            <a routerLink="/account">Dashboard</a>
+          </li>
+          <li *ngIf="this.ajax.loggedInUser" class="point">
+            <a (click)="removeId()">Logout</a>
           </li>
           <li>
             <a routerLink="/about">About Me</a>

@@ -12,6 +12,10 @@ import { AboutComponent } from './about/about.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MessageBoxComponent } from './message-box/message-box.component';
+import { GetFavPipe } from './get-fav.pipe';
+import { MessageListComponent } from './message-list/message-list.component';
+import { ErrorBoxComponent } from './error-box/error-box.component';
 
 
 @NgModule({
@@ -25,6 +29,10 @@ import { RegisterComponent } from './register/register.component';
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
+    MessageBoxComponent,
+    GetFavPipe,
+    MessageListComponent,
+    ErrorBoxComponent,
   ],
   imports: [
     FormsModule,

@@ -1,0 +1,9 @@
+<div class=" message alert" role="alert">
+  <button type="button" class="close" data-dismiss="alert" style="padding:3px;" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <button type="button" [ngClass]="{'clicked':data.fav,'myclose':true}" (click)="toggleFav()" style="padding:3px;" aria-label="Favourite">
+    <span class="glyphicon glyphicon-heart" style="color:grey;" aria-hidden="true" ></span>
+  </button>
+  {{data.message}}
+</div>
