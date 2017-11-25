@@ -1,150 +1,120 @@
 import { Injectable } from '@angular/core';
 import { DataBlock, Message } from './jsons/DataClasses';
-
+import { HttpClient } from '@angular/common/http';
+import { Subscription, ISubscription } from 'rxjs/Subscription';
+import { Subscribable } from 'rxjs/Observable';
 @Injectable()
 export class AjaxCallService {
-  loggedInUser = false;
   getToken = {
     tokenID: 1000,
     getTokenID: function () {
       return this.tokenID++;
     }
   }
+  userdata: DataBlock;
+  registered: boolean;
+  loggedInUser: boolean = false;
 
-
-  tempArray: any[] = [];
-
-  constructor() {
-    console.log("ok")
-    
-    this.tempArray.push({
-      'username': 'manishekaneja',
-      'fullName': 'Manish Aneja',
-      'email': 'mani@gmail.com',
-      'password': '123123',
-      'tokenID': this.getToken.getTokenID(),
-      'messages':  [ new Message("Welcome To MessageME", true),
-        new Message("Welcome To MessageME 2", false),
-        new Message("Welcome To MessageME 33", true),
-      ]
-
-    });
-    this.tempArray.push({
-      'username': 'ma@gmail.com',
-      'fullName': 'Mani',
-      'email': 'ma@gmail.com',
-      'password': '123123123',
-      'tokenID': this.getToken.getTokenID(),
-      'messages': [ new Message("Welcome To MessageME", true),
-      new Message("Welcome To MessageME 2", false),
-      new Message("Welcome To MessageME 33", true),
-    ]
-    });
-
+ngOnInit(){
+  this.preCheck();
+}
+  setValue(data: DataBlock) {
+    this.userdata.fullName = data.fullName || this.userdata.fullName;
+    this.userdata.username = data.username || this.userdata.username;
+    this.userdata.email = data.email || this.userdata.email;
+    this.userdata.messages = data.messages || this.userdata.messages;
+    this.userdata.password = data.password || this.userdata.password;
   }
 
-  preCheck(): void {
+  constructor(private http: HttpClient) {
+    this.userdata = new DataBlock("", "","","","",[],"");
+  }
+
+  // test() {
+  //   this.http.get("http://localhost:3000/test").subscribe(function (err: any,):void {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     if (err.body)
+  //       console.log(err.body);
+  //   })
+  // }
+  //Send only token and recive only boolean
+  preCheck(): Subscription {
     if (localStorage.tokenID) {
-      if (this.tempArray.filter(ele => ele.tokenID === localStorage.tokenID)) {
-        this.loggedInUser = true;
-      }
-    }
-
-  }
-  getData(token: string): any {
-    let data = this.tempArray.filter(ele => {
-      if (ele.tokenID == token) {
-        return ele;
-      }
-    });
-    if (data.length) {
-      return data[0];
+      return this.http.get("http://localhost:3000/checktoken").subscribe(data => {
+        console.log("preCheck=>");
+        console.log(data);
+        let response: any = data;
+        this.loggedInUser = response.valid;
+      })
     }
     return null;
   }
-  doRegister(data: DataBlock): boolean {
-    if (data.cpassword === data.password) {
-      if (this.tempArray.filter(reg => {
-        if (reg.email === data.email) {
-          console.log(reg);
-          return reg;
-        }
-      }).length) {
-        return false;
-      }
-      else {
-        let obj = new DataBlock(data.email, data.password, data.fullName, data.username, data.cpassword,
-          [
-            new Message("Welcome To MessageME", true),
-            new Message("Welcome To MessageME 2", false)
-          ]);
-        this.tempArray.push(obj);
-        return true;
-      }
-    }
-    else {
-      return false;
-    }
-
-  }
-   
-  updateMessage(token:string,mess:Message):void{
-    let result=this.tempArray.filter(ele=>{
-      if(ele.tokenID==token){
-        return ele;
-      }
-    });
-    if(result.length){
-      result[0].messages=result[0].messages.filter(message=>{
-        if(message===mess){
-          // return new Message(message.message,!(message.fav));
-        message.fav=!(message.fav);
-        }
-        // else{
-          return message;
-        // }
+  //Sends only token recive object of data
+  getData(): void {
+    if (localStorage.tokenID) {
+      this.http.get("http://localhost:3000/checktoken").subscribe(data => {
+        console.log("getData=>");
+        console.log(data);
+        let response: any = data;
+        this.loggedInUser = response.valid;
+        this.setValue(response.data);
       })
-      console.log("Here "+result);
     }
   }
-  deleteMessage(token:string,mess:Message){
-    let result=this.tempArray.filter(ele=>{
-      if(ele.tokenID==token){
-        return ele;
-      }
-    });
-    if(result.length){
-      result[0].messages=result[0].messages.filter(message=>{
-        if(message!==mess){
-          return message;
-          
-        }
-      })
-      console.log("Here 2 "+JSON.stringify(result[0].messages));
-    }
-  }
-
-
-
-  doLogin(data: DataBlock): boolean {
-
-    let obj = this.tempArray.filter(ele => {
-      if (ele.email === data.email) {
-        return ele;
+  //Sends token and message block and recive updated the Data Block
+  updateMessage(mess: Message): void {
+    let token = localStorage.tokenID;
+    this.http.get("http://localhost:3000/manageFav").subscribe((res) => {
+      console.log("updateMessage=>");
+      console.log(res);
+      let response: any = res;
+      if (response.valid) {
+        this.setValue(JSON.parse(response.data));
       }
     })
-    console.log(this.tempArray);
-    console.log(obj);
-    if (obj.length && obj[0].password === data.password) {
-      localStorage.tokenID = obj[0].tokenID;
-      this.loggedInUser = true;
-      return true;
-    }
-    else {
-      console.log("failed");
-      return false;
-    }
   }
+  //Sends token and message block and recive updated the Data Block
+  deleteMessage(mess: Message) {
+    let token = localStorage.tokenID;
+    this.http.get("http://localhost:3000/deleteMessage").subscribe((res) => {
+      console.log("deleteMessage=>");
+      console.log(res);
+      let response: any = res;
+      if (response.valid) {
+        this.setValue(JSON.parse(response.data));
+      }
+    })
+  }
+  //Send the data block and recives boolean
+  doRegister(data: DataBlock): Subscription {
+    return this.http.get("http://localhost:3000/register").subscribe(data => {
+      console.log("DoRegister=>");
+      console.log(data);
+      let response: any = data;
+      if (response.valid) {
+        this.registered = true;
+      }
+      setTimeout(() => {
+        this.registered = false;
+      }, 10000);
+    })
+  }
+  //Sends the DataBlock ( email and password) and recives only token
+  doLogin(data: DataBlock): Subscription {
+    return this.http.get("http://localhost:3000/login").subscribe(data => {
+      console.log("DoLogin=>");
+      console.log(data);
+      let response: any = data;
+      if (response.valid) {
+        this.loggedInUser = true;
+        localStorage.tokenID = response.token;
+      }
+    })
+  }
+
+
 }
 
 

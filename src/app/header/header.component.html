@@ -17,15 +17,15 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin:0px 150px;">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a routerLink="/home">Home</a>
+            <a routerLink="/">Home</a>
           </li>
-          <li *ngIf="!this.ajax.loggedInUser">
+          <li *ngIf="!isloggedInUser">
             <a routerLink="/account/login">Account</a>
           </li>
-          <li *ngIf="this.ajax.loggedInUser">
+          <li *ngIf="isloggedInUser">
             <a routerLink="/account">Dashboard</a>
           </li>
-          <li *ngIf="this.ajax.loggedInUser" class="point">
+          <li *ngIf="isloggedInUser" class="point">
             <a (click)="removeId()">Logout</a>
           </li>
           <li>

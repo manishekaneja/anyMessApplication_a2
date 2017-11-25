@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataBlock } from '../jsons/DataClasses';
 import { AjaxCallService } from '../ajax-call.service';
 import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -9,24 +10,33 @@ import { FormControl } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   invalidAttempt = false;
-  registered=false; 
+  registered = false;
+  wait = false;
   data = new DataBlock("", "", "", "", "");
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {
     this.ajaxCall.preCheck();
-    if (this.ajaxCall.loggedInUser) {
-      console.log("redirect to loggin Page");
-    }
   }
   doRegister(): void {
-    if(this.ajaxCall.doRegister(this.data)){
-      this.registered=true;
-      this.invalidAttempt=false;
+    this.invalidAttempt = false;
+    this.registered = false;
+    this.wait = true;
+    if (this.data.cpassword === this.data.password) {
+      this.ajaxCall.doRegister(this.data).add(() => {
+        if (this.ajaxCall.registered == true) {
+          this.wait = false;
+          this.registered = true;
+        }
+        else {
+          this.wait = false;
+          this.invalidAttempt = true;
+        }
+      })
     }
     else{
-      this.registered=false;
-      this.invalidAttempt=true;
+      this.wait = false;
+      this.invalidAttempt = true;
     }
   }
 }

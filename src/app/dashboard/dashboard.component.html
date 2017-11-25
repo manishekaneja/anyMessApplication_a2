@@ -1,4 +1,4 @@
-<div id="container">
+<div id="container" *ngIf="this.ajax.loggedInUser && details">
   <div class="container col-sm-12" style="background-color: lightgrey;height:200px;">
     <div id="userinfo" style="margin:10px">
       <div class="figure" style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
@@ -21,23 +21,19 @@
   <div class="container col-sm-12" style="background-color: white;padding:50px;margin-top:10px;">
     <!-- Nav tabs -->
     <ul class="nav nav-pills nav-justified" role="tablist">
-      <li role="presentation" class="active">
-        <a href="#message" aria-controls="home" role="tab" data-toggle="tab">Received</a>
+      <li role="presentation" [ngClass]="{'active':showthis}" (click)="showthis=true;">
+        <a> Received
+        </a>
       </li>
-      <li role="presentation">
-        <a href="#fav" aria-controls="messages" role="tab" data-toggle="tab">Favorites</a>
+      <li role="presentation" [ngClass]="{'active':!showthis}" (click)="showthis=false;">
+        <a> Favorites</a>
       </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content scroll-box" style="height:400px;overflow-y:scroll;">
-      <div role="tabpanel" class="tab-pane active" id="message">
-        <app-message-list [myList]="details.messages"></app-message-list>
-      </div>
-      <div role="tabpanel" class="tab-pane" id="fav">
-        <app-message-list [myList]="details.messages|getFav"></app-message-list>
-      </div>
+      <app-message-list [myList]="details.messages" *ngIf="showthis"></app-message-list>
+      <app-message-list [myList]="ajax.userdata.messages|getFav" *ngIf="!showthis"></app-message-list>
     </div>
-
   </div>
 </div>

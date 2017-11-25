@@ -15,10 +15,10 @@ console.log("init");
   }
   constructor(private ajax:AjaxCallService){}
   toggleFav() {
-      this.ajax.updateMessage(localStorage.tokenID,this.data);
+      this.ajax.updateMessage(this.data);
   }
   removeMess(){
-    this.ajax.deleteMessage(localStorage.tokenID,this.data);
+    this.ajax.deleteMessage(this.data);
 
   }
 }

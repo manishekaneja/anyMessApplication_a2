@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { AjaxCallService } from '../ajax-call.service';
 
 @Component({
@@ -6,18 +6,23 @@ import { AjaxCallService } from '../ajax-call.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnChanges {
 
-  constructor(public ajax: AjaxCallService) { }
   removeId() {
     this.ajax.loggedInUser = null;
     if (localStorage.tokenID) {
       localStorage.clear();
     }
   }
-
+  isloggedInUser;
+  constructor(private ajax: AjaxCallService) { }
   ngOnInit() {
     this.ajax.preCheck();
+    this.isloggedInUser = this.ajax.loggedInUser;
+  }
+  ngOnChanges() {
+    this.isloggedInUser = this.ajax.loggedInUser;
+
   }
 
 }

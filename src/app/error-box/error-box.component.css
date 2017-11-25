@@ -3,6 +3,20 @@
     font-weight:900;
 
 }
+@keyframes anim{
+    from{
+        transform: scale(0.9);
+    }
+    to{
+        transform: scale(1.1);
+    }
+}
+.animateIt{
+    animation-name: anim;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
 .red{
     color: rgb(202, 67, 67)
 }

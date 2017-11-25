@@ -11,8 +11,7 @@ import { ErrorBoxComponent } from './error-box/error-box.component'
 import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent, pathMatch: "full" },
   {
     path: 'account', component: MyformComponent, children: [
       { path: 'login', component: LoginComponent },

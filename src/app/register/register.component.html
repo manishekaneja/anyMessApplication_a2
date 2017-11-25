@@ -3,9 +3,18 @@
   <strong>Either Username is unavilable or details are not valid </strong>
 </div>
 <div class=" message alert alert-success  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="registered" style="text-align:center"
-role="alert">
-<strong>Your Account has been registerd, Login to Access your Account </strong>
+  role="alert">
+  <strong>Your Account has been registerd, Login to Access your Account </strong>
 </div>
+<div class=" message alert alert-warning  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="wait" style="text-align:center"
+  role="alert">
+  <strong>Please wait till the Registration is Completed
+    <span style="font-size:10px;display:block;">Don't navigate from this Section</span>
+  </strong>
+</div>
+
+
+
 <form #myform="ngForm" class="form-horizontal col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
   <div class="form-group box">
     <h2>Register Panel</h2>
@@ -54,11 +63,12 @@ role="alert">
   <div class="form-group">
     <label for="cpassword" class="col-sm-3 control-label">Confirm Password</label>
     <div class="col-sm-9">
-      <input type="password" name="cpassword" id="cpassword" class="form-control" placeholder="Re-enter Password here" required  maxlength="16" [(ngModel)]="data.cpassword" #cpassword="ngModel">
+      <input type="password" name="cpassword" id="cpassword" class="form-control" placeholder="Re-enter Password here" required
+        maxlength="16" [(ngModel)]="data.cpassword" #cpassword="ngModel">
     </div>
   </div>
   <div class="form-group">
-    <button type="submit" [disabled]="!myform.form.valid" class="btn btn-primary col-sm-12" style="width:100%;height:100%;" (click)="doRegister()">Submit</button>
+    <button type="submit" [disabled]="!myform.form.valid" class="btn btn-primary col-sm-12" style="width:100%;height:100%;" (click)="doRegister()">Register</button>
     <span>*
       <span style="font-size:10px;"> All fields are mandatory</span>
     </span>

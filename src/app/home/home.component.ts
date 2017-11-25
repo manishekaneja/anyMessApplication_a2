@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AjaxCallService } from '../ajax-call.service';
+import { Message } from '../jsons/DataClasses';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-
-  constructor() { }
-
+export class HomeComponent {
+  isLoggedIn;
+  constructor(private ajax: AjaxCallService) { }
   ngOnInit() {
+    this.isLoggedIn = this.ajax.loggedInUser;
   }
-
+  ngOnChange(){
+    this.isLoggedIn = this.ajax.loggedInUser;    
+  }
 }
