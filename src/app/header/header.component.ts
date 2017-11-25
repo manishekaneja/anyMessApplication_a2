@@ -14,15 +14,8 @@ export class HeaderComponent implements OnInit, OnChanges {
       localStorage.clear();
     }
   }
-  isloggedInUser;
   constructor(private ajax: AjaxCallService) { }
-  ngOnInit() {
-    this.ajax.preCheck();
-    this.isloggedInUser = this.ajax.loggedInUser;
-  }
-  ngOnChanges() {
-    this.isloggedInUser = this.ajax.loggedInUser;
-
-  }
+  ngOnInit() {  }
+  ngOnChanges(){  }
 
 }

@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorBoxComponent } from './error-box/error-box.component'
 import { SettingComponent } from './setting/setting.component';
+import { UserMessageComponent } from './user-message/user-message.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: "full" },
@@ -20,6 +21,7 @@ const routes: Routes = [
   },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'user', component:UserMessageComponent },
   {
     path: '**', component: ErrorBoxComponent
   }

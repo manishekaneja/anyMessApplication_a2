@@ -17,6 +17,7 @@ import { GetFavPipe } from './get-fav.pipe';
 import { MessageListComponent } from './message-list/message-list.component';
 import { ErrorBoxComponent } from './error-box/error-box.component';
 import { SettingComponent } from './setting/setting.component';
+import { UserMessageComponent } from './user-message/user-message.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { SettingComponent } from './setting/setting.component';
     MessageListComponent,
     ErrorBoxComponent,
     SettingComponent,
+    UserMessageComponent,
   ],
   imports: [
     FormsModule,

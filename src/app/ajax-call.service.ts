@@ -14,6 +14,7 @@ export class AjaxCallService {
   userdata: DataBlock;
   registered: boolean;
   loggedInUser: boolean = false;
+  addResult:any;
 
 ngOnInit(){
   this.preCheck();
@@ -84,6 +85,18 @@ ngOnInit(){
       let response: any = res;
       if (response.valid) {
         this.setValue(JSON.parse(response.data));
+      }
+    })
+  }
+
+  addMessage(mess: Message):Subscription {
+    let token = localStorage.tokenID;
+    return this.http.get("http://localhost:3000/addMessage").subscribe((res) => {
+      console.log("addMessage=>");
+      console.log(res);
+      this.addResult= res;
+      if (this.addResult.valid) {
+        this.setValue(JSON.parse(this.addResult.data));
       }
     })
   }

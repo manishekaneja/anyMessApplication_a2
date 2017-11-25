@@ -10,12 +10,11 @@ import { AjaxCallService } from '../ajax-call.service';
 })
 export class LoginComponent implements OnInit {
 
-  data = new DataBlock("","");
+  data = new DataBlock("", "");
   invalidAttempt = false;
   constructor(public ajaxCall: AjaxCallService) {
   }
-  ngOnInit() {
-    this.ajaxCall.preCheck();  }
+  ngOnInit() { }
   reset() {
     this.data.email = "";
     this.data.password = "";
