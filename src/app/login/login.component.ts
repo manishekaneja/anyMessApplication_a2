@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     this.ajaxCall.doLogin(this.data).add(() => {
       if (this.ajaxCall.loggedInUser) {
         this.router.navigate(['/account/dashboard']);
-        console.log("redirect to loggin Page");
       }
       else {
         this.reset();

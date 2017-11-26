@@ -6,11 +6,5 @@ import { AjaxCallService } from '../ajax-call.service';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit {
-
-  constructor(private ajax:AjaxCallService) { }
-
-  ngOnInit() {
-  }
-
+export class AboutComponent {
 }

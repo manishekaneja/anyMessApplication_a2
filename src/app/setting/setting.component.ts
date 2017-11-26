@@ -15,7 +15,6 @@ export class SettingComponent implements OnInit {
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {
-    // this.ajaxCall.preCheck();
     this.data=this.ajaxCall.userdata;
     this.data.password="";
   }

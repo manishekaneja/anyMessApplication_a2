@@ -6,10 +6,12 @@ import { AjaxCallService } from './ajax-call.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[]
+  providers: []
 })
 export class AppComponent {
-  constructor(private ajax:AjaxCallService){
-    this.ajax.preCheck();
+  constructor(private ajax: AjaxCallService) {
+    if (localStorage.tokenID) {
+      this.ajax.preCheck();
+    }
   }
 }

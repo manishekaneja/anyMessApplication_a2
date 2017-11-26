@@ -13,21 +13,11 @@ export class MyformComponent implements OnInit, OnChanges {
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {
-    let subs = this.ajaxCall.preCheck();
-    if (subs) {
-      subs.add(() => {
-        this.loggedInUser = this.ajaxCall.loggedInUser;
-      })
-    }
   }
   ngOnChanges() {
-    this.loggedInUser = this.ajaxCall.loggedInUser;
   }
   doLogin(): void {
     this.ajaxCall.doLogin(this.data);
-    if (this.ajaxCall.loggedInUser) {
-      console.log("redirect to loggin Page");
-    }
 
   }
 

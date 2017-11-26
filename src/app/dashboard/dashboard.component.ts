@@ -12,12 +12,13 @@ export class DashboardComponent implements OnInit {
   details: any;
   showthis: boolean;
   constructor(private ajax: AjaxCallService) {
-    this.details = new DataBlock("", "","","","",[],"");
+    this.details = new DataBlock("", "", "", "", "", [], "");
     this.showthis = true;
   }
 
   ngOnInit() {
-    this.details = this.ajax.userdata;
-    this.ajax.getData();
+    this.ajax.preCheck().add(() => {
+      this.details = this.ajax.userdata;
+    })
   }
 }

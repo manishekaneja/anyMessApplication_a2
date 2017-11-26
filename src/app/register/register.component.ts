@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   invalidAttempt = false;
   registered = false;
   wait = false;
-  data = new DataBlock("", "", "", "", "");
+  data = new DataBlock("", "", "", "","");
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {
@@ -42,10 +42,7 @@ export class RegisterComponent implements OnInit {
       this.invalidAttempt = true;
     }
   }
-  ddo() {
-    this.data.cpassword = this.data.cpassword;
-    console.log('ok')
-  }
+  
 }
 
 

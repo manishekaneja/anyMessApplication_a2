@@ -18,9 +18,6 @@ export class AjaxCallService {
   addResult: any;
   fromSetting: boolean;
 
-  ngOnInit() {
-
-  }
   setValue(data: DataBlock) {
     this.userdata.fullName = data.fullName || this.userdata.fullName;
     this.userdata.username = data.username || this.userdata.username;
@@ -35,77 +32,48 @@ export class AjaxCallService {
 
   //Send only token and recive only boolean
   preCheck(): Subscription {
-    if (localStorage.tokenID) {
-      return this.http.get("http://localhost:3000/checktoken").subscribe(data => {
-        console.log("preCheck=>");
-        console.log(data);
-        let response: any = data;
-        this.loggedInUser = response.valid;
-        this.router.navigate(['/account/dashboard'])
-      })
-    }
-    return null;
+    return this.http.post("http://localhost:4000/checktoken", { 'tokenID': localStorage.tokenID }).subscribe((data) => {
+      let response: any = data;
+      this.loggedInUser = response.valid;
+      this.setValue(response.data);
+      this.router.navigate(['/account/dashboard'])
+    })
   }
-  performLogOut() {
+  performLogOut(): void {
     this.loggedInUser = false;
-    if (localStorage.tokenID) {
-      localStorage.clear();
-    }
+    localStorage.clear();
     this.router.navigate(['./account/login']);
-  }
-  //Sends only token recive object of data
-  getData(): void {
-    if (localStorage.tokenID) {
-      this.http.get("http://localhost:3000/checktoken").subscribe(data => {
-        console.log("getData=>");
-        console.log(data);
-        let response: any = data;
-        this.loggedInUser = response.valid;
-        this.setValue(response.data);
-      })
-    }
   }
   //Sends token and message block and recive updated the Data Block
   updateMessage(mess: Message): void {
     let token = localStorage.tokenID;
-    this.http.get("http://localhost:3000/manageFav").subscribe((res) => {
-      console.log("updateMessage=>");
-      console.log(res);
+    this.http.post("http://localhost:4000/manageFav", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
       let response: any = res;
       if (response.valid) {
-        this.setValue(JSON.parse(response.data));
+        this.setValue(response.data);
       }
     })
   }
   //Sends token and message block and recive updated the Data Block
   deleteMessage(mess: Message) {
-    let token = localStorage.tokenID;
-    this.http.get("http://localhost:3000/deleteMessage").subscribe((res) => {
-      console.log("deleteMessage=>");
-      console.log(res);
+    this.http.post("http://localhost:4000/deleteMessage", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
       let response: any = res;
       if (response.valid) {
         this.setValue(JSON.parse(response.data));
       }
     })
   }
-
-  addMessage(mess: Message): Subscription {
-    let token = localStorage.tokenID;
-    return this.http.get("http://localhost:3000/addMessage").subscribe((res) => {
-      console.log("addMessage=>");
-      console.log(res);
+  addMessage(username: string, message: string): Subscription {
+    return this.http.post("http://localhost:4000/addMessage", { 'username': username, 'message': message }).subscribe((res) => {
       this.addResult = res;
       if (this.addResult.valid) {
-        this.setValue(JSON.parse(this.addResult.data));
+        this.setValue(this.addResult.data);
       }
     })
   }
   //Send the data block and recives boolean
   doRegister(data: DataBlock): Subscription {
-    return this.http.get("http://localhost:3000/register").subscribe(data => {
-      console.log("DoRegister=>");
-      console.log(data);
+    return this.http.post("http://localhost:4000/register", data).subscribe(data => {
       let response: any = data;
       if (response.valid) {
         this.registered = true;
@@ -117,10 +85,8 @@ export class AjaxCallService {
   }
   //Sends the DataBlock ( email and password) and recives only token
   doLogin(data: DataBlock): Subscription {
-    return this.http.get("http://localhost:3000/login").subscribe(data => {
-      console.log("DoLogin=>");
-      console.log(data);
-      let response: any = data;
+    return this.http.post("http://localhost:4000/login", { 'email': data.email, 'password': data.password }).subscribe((res) => {
+      let response: any = res;
       if (response.valid) {
         this.loggedInUser = true;
         localStorage.tokenID = response.token;

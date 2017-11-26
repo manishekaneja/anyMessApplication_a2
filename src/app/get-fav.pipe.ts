@@ -9,7 +9,6 @@ export class GetFavPipe implements PipeTransform {
 
   transform(data: Message[]): Message[] {
     return data.filter(my => {
-      console.log(my);
       if(my.fav){
         return my;
       }

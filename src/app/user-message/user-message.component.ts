@@ -16,11 +16,9 @@ export class UserMessageComponent implements OnInit {
   }
   failed: boolean;
   succ: boolean;
-  addMessage: String;
+  addMessage: string;
   send() {
-    this.addMessage = "";
-    this.ajax.addMessage(new Message("ok", false)).add(() => {
-      // let res:any=data;
+    this.ajax.addMessage('123123', this.addMessage).add(() => {
       if (this.ajax.addResult.valid) {
         this.succ = true;
         setTimeout(() => {

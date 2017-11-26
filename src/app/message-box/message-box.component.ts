@@ -1,4 +1,4 @@
-import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Message } from '../jsons/DataClasses'
 import { AjaxCallService } from '../ajax-call.service';
 
@@ -11,13 +11,12 @@ export class MessageBoxComponent {
 
   @Input() data: Message;
   ngOnInit() {
-console.log("init");    
   }
-  constructor(private ajax:AjaxCallService){}
+  constructor(private ajax: AjaxCallService) { }
   toggleFav() {
-      this.ajax.updateMessage(this.data);
+    this.ajax.updateMessage(this.data);
   }
-  removeMess(){
+  removeMess() {
     this.ajax.deleteMessage(this.data);
 
   }
