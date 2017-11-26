@@ -6,8 +6,10 @@ import { AjaxCallService } from './ajax-call.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[AjaxCallService]
+  providers:[]
 })
 export class AppComponent {
- 
+  constructor(private ajax:AjaxCallService){
+    this.ajax.preCheck();
+  }
 }

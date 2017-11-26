@@ -18,6 +18,9 @@ import { MessageListComponent } from './message-list/message-list.component';
 import { ErrorBoxComponent } from './error-box/error-box.component';
 import { SettingComponent } from './setting/setting.component';
 import { UserMessageComponent } from './user-message/user-message.component';
+import { LandAtGuard } from './no-land-acc.guard';
+import { AjaxCallService } from './ajax-call.service';
+import { EqualCheckDirective } from './equal-check.directive';
 
 
 @NgModule({
@@ -37,6 +40,7 @@ import { UserMessageComponent } from './user-message/user-message.component';
     ErrorBoxComponent,
     SettingComponent,
     UserMessageComponent,
+    EqualCheckDirective
   ],
   imports: [
     FormsModule,
@@ -44,7 +48,7 @@ import { UserMessageComponent } from './user-message/user-message.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AjaxCallService,LandAtGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,10 +9,7 @@ import { AjaxCallService } from '../ajax-call.service';
 export class HeaderComponent implements OnInit, OnChanges {
 
   removeId() {
-    this.ajax.loggedInUser = null;
-    if (localStorage.tokenID) {
-      localStorage.clear();
-    }
+    this.ajax.performLogOut();
   }
   constructor(private ajax: AjaxCallService) { }
   ngOnInit() {  }

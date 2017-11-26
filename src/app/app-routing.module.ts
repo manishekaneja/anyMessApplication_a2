@@ -10,24 +10,30 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorBoxComponent } from './error-box/error-box.component'
 import { SettingComponent } from './setting/setting.component';
 import { UserMessageComponent } from './user-message/user-message.component';
+import { LandAtGuard } from './no-land-acc.guard';
+import { AjaxCallService } from './ajax-call.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: "full" },
   {
-    path: 'account', component: MyformComponent, children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
+    path: 'account', children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: "full" },
+      { path: 'login', canActivate: [LandAtGuard], component: LoginComponent },
+      { path: 'register', canActivate: [LandAtGuard], component: RegisterComponent },
+      { path: 'dashboard', canActivate: [LandAtGuard], component: DashboardComponent },
+      { path: 'settings', canActivate: [LandAtGuard], component: SettingComponent }
     ]
   },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'user', component:UserMessageComponent },
+  { path: 'user', component: UserMessageComponent },
   {
     path: '**', component: ErrorBoxComponent
   }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: []
 })
 export class AppRoutingModule { }

@@ -3,6 +3,7 @@ import { DataBlock, Message } from './jsons/DataClasses';
 import { HttpClient } from '@angular/common/http';
 import { Subscription, ISubscription } from 'rxjs/Subscription';
 import { Subscribable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 @Injectable()
 export class AjaxCallService {
   getToken = {
@@ -14,11 +15,12 @@ export class AjaxCallService {
   userdata: DataBlock;
   registered: boolean;
   loggedInUser: boolean = false;
-  addResult:any;
+  addResult: any;
+  fromSetting: boolean;
 
-ngOnInit(){
-  this.preCheck();
-}
+  ngOnInit() {
+
+  }
   setValue(data: DataBlock) {
     this.userdata.fullName = data.fullName || this.userdata.fullName;
     this.userdata.username = data.username || this.userdata.username;
@@ -27,19 +29,10 @@ ngOnInit(){
     this.userdata.password = data.password || this.userdata.password;
   }
 
-  constructor(private http: HttpClient) {
-    this.userdata = new DataBlock("", "","","","",[],"");
+  constructor(private http: HttpClient, private router: Router) {
+    this.userdata = new DataBlock("", "", "", "", "", [], "");
   }
 
-  // test() {
-  //   this.http.get("http://localhost:3000/test").subscribe(function (err: any,):void {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //     if (err.body)
-  //       console.log(err.body);
-  //   })
-  // }
   //Send only token and recive only boolean
   preCheck(): Subscription {
     if (localStorage.tokenID) {
@@ -48,9 +41,17 @@ ngOnInit(){
         console.log(data);
         let response: any = data;
         this.loggedInUser = response.valid;
+        this.router.navigate(['/account/dashboard'])
       })
     }
     return null;
+  }
+  performLogOut() {
+    this.loggedInUser = false;
+    if (localStorage.tokenID) {
+      localStorage.clear();
+    }
+    this.router.navigate(['./account/login']);
   }
   //Sends only token recive object of data
   getData(): void {
@@ -89,12 +90,12 @@ ngOnInit(){
     })
   }
 
-  addMessage(mess: Message):Subscription {
+  addMessage(mess: Message): Subscription {
     let token = localStorage.tokenID;
     return this.http.get("http://localhost:3000/addMessage").subscribe((res) => {
       console.log("addMessage=>");
       console.log(res);
-      this.addResult= res;
+      this.addResult = res;
       if (this.addResult.valid) {
         this.setValue(JSON.parse(this.addResult.data));
       }
@@ -126,8 +127,6 @@ ngOnInit(){
       }
     })
   }
-
-
 }
 
 

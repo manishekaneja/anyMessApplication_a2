@@ -20,10 +20,16 @@
             <a routerLink="/">Home</a>
           </li>
           <li *ngIf="!this.ajax.loggedInUser">
-            <a routerLink="/account/login">Account</a>
+            <a routerLink="/account/login">Login</a>
+          </li>
+          <li *ngIf="!this.ajax.loggedInUser">
+            <a routerLink="/account/register">Register</a>
           </li>
           <li *ngIf="this.ajax.loggedInUser">
             <a routerLink="/account">Dashboard</a>
+          </li>
+          <li *ngIf="this.ajax.loggedInUser">
+            <a routerLink="/account/settings">Setting</a>
           </li>
           <li *ngIf="this.ajax.loggedInUser" class="point">
             <a (click)="removeId()">Logout</a>

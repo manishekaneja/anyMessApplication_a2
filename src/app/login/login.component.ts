@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataBlock } from '../jsons/DataClasses';
 import { AjaxCallService } from '../ajax-call.service';
+import { Router } from '@angular/router';
 
 @Component({
 
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   data = new DataBlock("", "");
   invalidAttempt = false;
-  constructor(public ajaxCall: AjaxCallService) {
+  constructor(public ajaxCall: AjaxCallService,private router:Router) {
   }
   ngOnInit() { }
   reset() {
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   doLogin(): void {
     this.ajaxCall.doLogin(this.data).add(() => {
       if (this.ajaxCall.loggedInUser) {
+        this.router.navigate(['/account/dashboard']);
         console.log("redirect to loggin Page");
       }
       else {
