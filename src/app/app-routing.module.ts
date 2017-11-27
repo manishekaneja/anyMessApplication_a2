@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MyformComponent } from './myform/myform.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -26,7 +25,7 @@ const routes: Routes = [
   },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'user', component: UserMessageComponent },
+  { path: 'user/:username', component: UserMessageComponent },
   {
     path: '**', component: ErrorBoxComponent
   }

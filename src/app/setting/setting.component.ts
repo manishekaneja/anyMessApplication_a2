@@ -18,12 +18,12 @@ export class SettingComponent implements OnInit {
     this.data=this.ajaxCall.userdata;
     this.data.password="";
   }
-  doRegister(): void {
+  doUpdate(): void {
     this.invalidAttempt = false;
     this.registered = false;
     this.wait = true;
     if (this.data.cpassword === this.data.password) {
-      this.ajaxCall.doRegister(this.data).add(() => {
+      this.ajaxCall.doUpdate(this.data).add(() => {
         if (this.ajaxCall.registered == true) {
           this.wait = false;
           this.registered = true;

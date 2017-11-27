@@ -5,12 +5,11 @@
         <img src="" alt="nf">
       </div>
       <div class="text" style="text-align: center;font-weight:700;">
-        {{"username"}} </div>
+        {{this.fullname}} </div>
     </div>
     <div>
 
       <form #messform="ngForm" style="margin-top:80px;text-align: center">
-        <!-- <input type="hidden" name="user" id="user" value=<%=user %>> -->
         <label for="message" style="display:block;text-align: center"> Just leave a Message</label>
         <textarea name="message" id="message" rows="5" style="width:100%;margin:0px auto;padding:10px;" [(ngModel)]="addMessage" required #message="ngModel" ></textarea>
         <button [disabled]="message.invalid" class="btn btn-success" (click)="send()"> Send </button>
@@ -18,12 +17,7 @@
     </div>
 
   </div>
-  <!-- <div id="warnbox" *ngIf="submit && !message.valid" class="alert alert-warning alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>Blank Messages are not appreciated!</strong>
-  </div> -->
+ 
   <div id="successbox" *ngIf="this.succ" class="alert alert-success alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>

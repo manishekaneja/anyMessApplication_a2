@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subscription, ISubscription } from 'rxjs/Subscription';
 import { Subscribable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AjaxCallService {
   getToken = {
@@ -17,6 +18,13 @@ export class AjaxCallService {
   loggedInUser: boolean = false;
   addResult: any;
   fromSetting: boolean;
+  switchloggin(b: boolean) {
+    if (b == true) {
+      this.preCheck().add(() => {
+        this.loggedInUser = b;
+      })
+    }
+  }
 
   setValue(data: DataBlock) {
     this.userdata.fullName = data.fullName || this.userdata.fullName;
@@ -36,7 +44,6 @@ export class AjaxCallService {
       let response: any = data;
       this.loggedInUser = response.valid;
       this.setValue(response.data);
-      this.router.navigate(['/account/dashboard'])
     })
   }
   performLogOut(): void {
@@ -59,9 +66,12 @@ export class AjaxCallService {
     this.http.post("http://localhost:4000/deleteMessage", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
       let response: any = res;
       if (response.valid) {
-        this.setValue(JSON.parse(response.data));
+        this.setValue(response.data);
       }
     })
+  }
+  getUserFullName(username:string):Observable<any>{
+   return this.http.post("http://localhost:4000/findUserName",{'username':username});
   }
   addMessage(username: string, message: string): Subscription {
     return this.http.post("http://localhost:4000/addMessage", { 'username': username, 'message': message }).subscribe((res) => {
@@ -83,13 +93,25 @@ export class AjaxCallService {
       }, 10000);
     })
   }
+
+  doUpdate(data: DataBlock): Subscription {
+    return this.http.post("http://localhost:4000/updateInfo", data).subscribe((data) => {
+      let response: any = data;
+      if (response.valid) {
+        this.registered = true;
+      }
+      setTimeout(() => {
+        this.registered = false;
+      }, 10000);
+    })
+  }
   //Sends the DataBlock ( email and password) and recives only token
   doLogin(data: DataBlock): Subscription {
     return this.http.post("http://localhost:4000/login", { 'email': data.email, 'password': data.password }).subscribe((res) => {
       let response: any = res;
       if (response.valid) {
-        this.loggedInUser = true;
         localStorage.tokenID = response.token;
+        this.switchloggin(true);
       }
     })
   }

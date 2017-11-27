@@ -11,7 +11,6 @@ export class EqualCheckDirective implements Validator {
   @Input() equalCheck;
   constructor() { }
   validate(control: AbstractControl): { [key: string]: any } {
-    console.log(this.equalCheck);
     return EqualityValid(this.equalCheck)(control);
   }
 

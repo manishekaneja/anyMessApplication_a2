@@ -1,18 +1,16 @@
-<p>
-  setting works!
-</p>
+
 <div id="formcss">
   <div class=" message alert alert-danger  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="invalidAttempt" style="text-align:center"
     role="alert">
-    <strong>Either Username is unavilable or details are not valid </strong>
+    <strong>Invalid Entries </strong>
   </div>
   <div class=" message alert alert-success  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="registered" style="text-align:center"
     role="alert">
-    <strong>Your Account has been registerd, Login to Access your Account </strong>
+    <strong>Data Updated </strong>
   </div>
   <div class=" message alert alert-warning  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="wait" style="text-align:center"
     role="alert">
-    <strong>Please wait till the Registration is Completed
+    <strong>Please wait till the updation is Completed
       <span style="font-size:10px;display:block;">Don't navigate from this Section</span>
     </strong>
   </div>
@@ -60,7 +58,7 @@
       </div> 
     </div>
     <div class="form-group">
-      <button type="submit" [disabled]="!myform.form.valid" class="btn btn-primary col-sm-12" style="width:100%;height:100%;" (click)="doRegister()">Update</button>
+      <button type="submit" [disabled]="!myform.form.valid" class="btn btn-primary col-sm-12" style="width:100%;height:100%;" (click)="doUpdate()">Update</button>
     </div>
   </form>
 </div>
