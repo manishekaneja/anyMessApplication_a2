@@ -7,24 +7,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AjaxCallService {
-  getToken = {
-    tokenID: 1000,
-    getTokenID: function () {
-      return this.tokenID++;
-    }
-  }
   userdata: DataBlock;
-  registered: boolean;
   loggedInUser: boolean = false;
-  addResult: any;
-  fromSetting: boolean;
-  switchloggin(b: boolean) {
-    if (b == true) {
-      this.preCheck().add(() => {
-        this.loggedInUser = b;
-      })
-    }
-  }
 
   setValue(data: DataBlock) {
     this.userdata.fullName = data.fullName || this.userdata.fullName;
@@ -34,17 +18,19 @@ export class AjaxCallService {
     this.userdata.password = data.password || this.userdata.password;
   }
 
+  readonly URL:string="http://localhost:4000";
+
   constructor(private http: HttpClient, private router: Router) {
     this.userdata = new DataBlock("", "", "", "", "", [], "");
   }
 
   //Send only token and recive only boolean
   preCheck(): Subscription {
-    return this.http.post("http://localhost:4000/checktoken", { 'tokenID': localStorage.tokenID }).subscribe((data) => {
+    return this.http.post((this.URL+"/checktoken").toString(), { 'tokenID': localStorage.tokenID }).subscribe((data) => {
       let response: any = data;
       this.loggedInUser = response.valid;
       this.setValue(response.data);
-    })
+    });
   }
   performLogOut(): void {
     this.loggedInUser = false;
@@ -54,7 +40,7 @@ export class AjaxCallService {
   //Sends token and message block and recive updated the Data Block
   updateMessage(mess: Message): void {
     let token = localStorage.tokenID;
-    this.http.post("http://localhost:4000/manageFav", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
+    this.http.post(this.URL+"/manageFav", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
       let response: any = res;
       if (response.valid) {
         this.setValue(response.data);
@@ -62,58 +48,31 @@ export class AjaxCallService {
     })
   }
   //Sends token and message block and recive updated the Data Block
-  deleteMessage(mess: Message) {
-    this.http.post("http://localhost:4000/deleteMessage", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
+  deleteMessage(mess: Message): void {
+    this.http.post(this.URL+"/deleteMessage", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
       let response: any = res;
       if (response.valid) {
         this.setValue(response.data);
       }
     })
   }
-  getUserFullName(username:string):Observable<any>{
-   return this.http.post("http://localhost:4000/findUserName",{'username':username});
+  getUserFullName(username: string): Observable<any> {
+    return this.http.post(this.URL+"/findUserName", { 'username': username });
   }
-  addMessage(username: string, message: string): Subscription {
-    return this.http.post("http://localhost:4000/addMessage", { 'username': username, 'message': message }).subscribe((res) => {
-      this.addResult = res;
-      if (this.addResult.valid) {
-        this.setValue(this.addResult.data);
-      }
-    })
+  addMessage(username: string, message: string): Observable<any> {
+    return this.http.post(this.URL+"/addMessage", { 'username': username, 'message': message });
   }
   //Send the data block and recives boolean
-  doRegister(data: DataBlock): Subscription {
-    return this.http.post("http://localhost:4000/register", data).subscribe(data => {
-      let response: any = data;
-      if (response.valid) {
-        this.registered = true;
-      }
-      setTimeout(() => {
-        this.registered = false;
-      }, 10000);
-    })
+  doRegister(data: DataBlock): Observable<any> {
+    return this.http.post(this.URL+"/register", data);
   }
 
-  doUpdate(data: DataBlock): Subscription {
-    return this.http.post("http://localhost:4000/updateInfo", data).subscribe((data) => {
-      let response: any = data;
-      if (response.valid) {
-        this.registered = true;
-      }
-      setTimeout(() => {
-        this.registered = false;
-      }, 10000);
-    })
+  doUpdate(data: DataBlock): Observable<any> {
+    return this.http.post(this.URL+"/updateInfo", data);
   }
   //Sends the DataBlock ( email and password) and recives only token
-  doLogin(data: DataBlock): Subscription {
-    return this.http.post("http://localhost:4000/login", { 'email': data.email, 'password': data.password }).subscribe((res) => {
-      let response: any = res;
-      if (response.valid) {
-        localStorage.tokenID = response.token;
-        this.switchloggin(true);
-      }
-    })
+  doLogin(data: DataBlock): Observable<any> {
+    return this.http.post(this.URL+"/login", { 'email': data.email, 'password': data.password });
   }
 }
 

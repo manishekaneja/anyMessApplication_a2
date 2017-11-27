@@ -11,7 +11,7 @@ import { AjaxCallService } from './ajax-call.service';
 export class AppComponent {
   constructor(private ajax: AjaxCallService) {
     if (localStorage.tokenID) {
-      this.ajax.preCheck();
+      this.ajax.preCheck();;
     }
   }
 }

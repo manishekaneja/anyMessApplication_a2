@@ -5,7 +5,7 @@ import { AjaxCallService } from '../ajax-call.service';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.css',"../jsons/validation.css"]
+  styleUrls: ['./setting.component.css', "../jsons/validation.css"]
 })
 export class SettingComponent implements OnInit {
   invalidAttempt = false;
@@ -15,16 +15,18 @@ export class SettingComponent implements OnInit {
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {
-    this.data=this.ajaxCall.userdata;
-    this.data.password="";
+    this.data = this.ajaxCall.userdata;
+    this.data.password = "";
   }
   doUpdate(): void {
     this.invalidAttempt = false;
     this.registered = false;
     this.wait = true;
     if (this.data.cpassword === this.data.password) {
-      this.ajaxCall.doUpdate(this.data).add(() => {
-        if (this.ajaxCall.registered == true) {
+      this.ajaxCall.doUpdate(this.data).subscribe((data) => {
+
+        let response: any = data;
+        if (response.valid == true) {
           this.wait = false;
           this.registered = true;
         }
@@ -33,11 +35,11 @@ export class SettingComponent implements OnInit {
           this.invalidAttempt = true;
         }
       })
+
     }
-    else{
+    else {
       this.wait = false;
       this.invalidAttempt = true;
     }
   }
-
 }

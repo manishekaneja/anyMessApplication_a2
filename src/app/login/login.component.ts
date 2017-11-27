@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   data = new DataBlock("", "");
   invalidAttempt = false;
-  constructor(public ajaxCall: AjaxCallService,private router:Router) {
+  constructor(public ajaxCall: AjaxCallService, private router: Router) {
   }
   ngOnInit() { }
   reset() {
@@ -21,9 +21,14 @@ export class LoginComponent implements OnInit {
     this.data.password = "";
   }
   doLogin(): void {
-    this.ajaxCall.doLogin(this.data).add(() => {
-      if (this.ajaxCall.loggedInUser) {
-        this.router.navigate(['/account/dashboard']);
+    this.ajaxCall.doLogin(this.data).subscribe((res) => {
+      let response: any = res;
+      if (response.valid) {
+        localStorage.tokenID = response.token;
+        this.ajaxCall.loggedInUser = true;
+        this.ajaxCall.preCheck().add(() => {
+          this.router.navigate(['/account/dashboard']);
+        });
       }
       else {
         this.reset();
@@ -31,5 +36,4 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-
 }

@@ -17,8 +17,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ajax.preCheck().add(() => {
+    this.ajax.preCheck();
       this.details = this.ajax.userdata;
-    })
   }
 }

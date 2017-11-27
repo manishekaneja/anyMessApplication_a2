@@ -10,19 +10,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-message.component.css']
 })
 export class UserMessageComponent implements OnInit {
-  constructor(private ajax: AjaxCallService, private route: ActivatedRoute, private router:Router) { }
+  constructor(private ajax: AjaxCallService, private route: ActivatedRoute, private router: Router) { }
   user: string;
-  fullname:string;
+  fullname: string;
   ngOnInit() {
     this.addMessage = "";
     this.user = this.route.snapshot.paramMap.get('username');
     this.ajax.getUserFullName(this.user).subscribe((res) => {
-      console.log(res);
-      if(res.fullName){
-        this.fullname=res.fullName;
+      if (res.fullName) {
+        this.fullname = res.fullName;
       }
-      else{
-      this.router.navigate(['/error']);
+      else {
+        this.router.navigate(['/error']);
       }
     })
   }
@@ -30,8 +29,9 @@ export class UserMessageComponent implements OnInit {
   succ: boolean;
   addMessage: string;
   send() {
-    this.ajax.addMessage(this.user, this.addMessage).add(() => {
-      if (this.ajax.addResult.valid) {
+    this.ajax.addMessage(this.user, this.addMessage).subscribe((res) => {
+      let result = res;
+      if (result.valid) {
         this.succ = true;
         setTimeout(() => {
           this.succ = false;

@@ -12,16 +12,32 @@ export class LandAtGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if (!(this.ajax.loggedInUser)) {
+    if (!localStorage.tokenID) {
       if (state.url == "/account/dashboard" || state.url == "/account/settings") {
         this.router.navigate(["/account/login"]);
       }
     }
     else {
-      if (state.url == "/account/login" || state.url == "/account/register") {
-        this.router.navigate(["/account/dashboard"]);
+      if (this.ajax.loggedInUser) {
+        if (state.url == "/account/login" || state.url == "/account/register") {
+          this.router.navigate(["/account/dashboard"]);
+        }
       }
+      else {
+        this.ajax.preCheck().add(() => {
+          if (!(this.ajax.loggedInUser)) {
+            if (state.url == "/account/dashboard" || state.url == "/account/settings") {
+              this.router.navigate(["/account/login"]);
+            }
+          }
+        })
+
+      }
+
+
+
     }
+
     return true;
   }
 }

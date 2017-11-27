@@ -13,7 +13,7 @@
         <span class="bold">
           <span class="red"> Fav Message :</span> {{ (details.messages|getFav).length}}</span>
       </div>
-      <a routerLink="/user/{{details.username}}" class="bold link">localhost:4200/user/{{details.username}}
+      <a routerLink="/user/{{details.username}}" class="bold link">{{this.ajax.URL}}/{{details.username}}
       </a>
     </div>
   </div>
