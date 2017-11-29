@@ -48,7 +48,7 @@
       <label for="password" class="col-sm-3 control-label">Enter Password</label>
       <div class="col-sm-9">
         <input type="password" name="password" id="password"  class="form-control" placeholder="Enter Password here" required minlength="4"
-          maxlength="16" (key)="ddo()" [(ngModel)]="data.password" #password="ngModel">
+          maxlength="16" [(ngModel)]="data.password" #password="ngModel">
         <span>*
           <span style="font-size:10px;"> Only 4-16 characters are allowed</span>
         </span>

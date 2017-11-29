@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
 
   details: any;
   showthis: boolean;
-  constructor(private ajax: AjaxCallService) {
+  constructor(public ajax: AjaxCallService) {
     this.details = new DataBlock("", "", "", "", "", [], "");
     this.showthis = true;
   }

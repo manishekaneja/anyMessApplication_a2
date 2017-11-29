@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   removeId() {
     this.ajax.performLogOut();
   }
-  constructor(private ajax: AjaxCallService) { }
+  constructor(public ajax: AjaxCallService) { }
   ngOnInit() {  }
 
 }
