@@ -3,4 +3,8 @@
      margin: 0px;
      padding: 0px;
      font-family: Signika;
-}
+     box-sizing: border-box;
+    }
+body{
+background-color: lightgreen;
+}    

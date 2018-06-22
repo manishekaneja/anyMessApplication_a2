@@ -1,12 +1,10 @@
-*{
-    box-sizing: border-box;
-}
-#main{
-    position: absolute;
-    background-color: lightgreen;
-    padding: 2em;
-    overflow: hidden;
-    height: 100%;
-    width:100%;
-}
 
+#main{
+    /* background-color: white; */
+}
+.containEverything{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    padding: 4.5vh 10vw;
+}
