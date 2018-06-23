@@ -1,6 +1,7 @@
 #full{
     text-align: center;
     box-shadow: 0px 0px 20px transparent;
+    background-color: transparent;
 }
 .whole{
     display: flex;
@@ -29,6 +30,7 @@
     padding: 1em;
     margin: 1em;
     box-shadow: 0px 0px 10px #222;
+    background:gainsboro;
 }
 h3{
     margin: 0px;

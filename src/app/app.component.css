@@ -1,10 +1,10 @@
 
-#main{
-    /* background-color: white; */
-}
 .containEverything{
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     padding: 4.5vh 10vw;
+}
+@media(max-width:425px){
+    .containEverything{
+        padding: 4.5vh 2vw;
+    }
+    
 }
