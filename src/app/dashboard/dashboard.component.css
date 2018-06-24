@@ -19,17 +19,6 @@
   .scroll-box::-webkit-scrollbar-thumb {
     background: rgba(0,0,0,.2); 
   }
-  .cover-bar {
-    position: absolute;
-    background: #fff;;
-    height: 100%;  
-    top: 0;
-    right: 0;
-    width: .4em;
-    -webkit-transition: all .5s;
-    opacity: 1;
-  }
-  /* MAGIC HAPPENS HERE */
   .scroll-bar-wrap:hover .cover-bar {
      opacity: 0;
     -webkit-transition: all .5s;
@@ -46,4 +35,20 @@
   .link{
     color:rgb(71, 71, 247);
   }
- 
+  #upperbox{
+    padding: 1em;
+    background-color: rgba(65,65,65,0.3);
+    box-shadow: 0px 0px 5px #000;
+  }
+  #lowerbox{
+    background-color:rgba(255,255,255,0.9);
+    box-shadow: 0px 0px 5px #aaa;
+    margin-top:10px;  
+    padding:1em;
+
+  }
+  @media(min-width:768px){
+    #lowerbox{
+      padding:5em;
+    }
+  }

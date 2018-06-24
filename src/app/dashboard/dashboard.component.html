@@ -1,24 +1,21 @@
-<div id="container">
-  <div class="container col-sm-12" style="background-color: lightgrey;height:200px;">
-    <div id="userinfo" style="margin:10px">
-      <div class="figure" style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
-        <img src="" alt="nf">
-      </div>
-      <div class="text" style="display:block;text-align: center;font-weight:700;">
-        {{details.username}} </div>
-      <div class="text" style="display:block;text-align: center;font-weight:700;">
-        <span class="bold">
-          <span class="red"> Messages:</span> {{details.messages.length}}
-        </span>
-        <span class="bold">
-          <span class="red"> Fav Message :</span> {{ (details.messages|getFav).length}}</span>
-      </div>
-      <a routerLink="/user/{{details.username}}" class="bold link">{{this.ajax.URL}}/{{details.username}}
-      </a>
+<div>
+  <div id="upperbox">
+    <div style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
+      <img src="" alt="nf">
     </div>
+    <div class="text" style="display:block;text-align: center;font-weight:700;">
+      {{details.username}} </div>
+    <div class="text" style="display:block;text-align: center;font-weight:700;">
+      <span class="bold">
+        <span class="red"> Messages:</span> {{details.messages.length}}
+      </span>
+      <span class="bold">
+        <span class="red"> Fav Message :</span> {{ (details.messages|getFav).length}}</span>
+    </div>
+    <a routerLink="/user/{{details.username}}" class="bold link">{{this.ajax.URL}}/{{details.username}}
+    </a>
   </div>
-  <div class="container col-sm-12" style="background-color: white;padding:50px;margin-top:10px;">
-    <!-- Nav tabs -->
+  <div id="lowerbox">
     <ul class="nav nav-pills nav-justified" role="tablist">
       <li role="presentation" [ngClass]="{'active':showthis}" (click)="showthis=true;">
         <a> Received
@@ -28,8 +25,6 @@
         <a> Favorites</a>
       </li>
     </ul>
-
-    <!-- Tab panes -->
     <div class="tab-content scroll-box" style="height:400px;overflow-y:scroll;">
       <app-message-list [myList]="details.messages" *ngIf="showthis"></app-message-list>
       <app-message-list [myList]="ajax.userdata.messages|getFav" *ngIf="!showthis"></app-message-list>

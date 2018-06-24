@@ -1,6 +1,6 @@
-<div id="container">
-  <div class="container col-sm-12" style="background-color: lightgrey;box-shadow:black 0px 0px 10px;margin:10px auto;">
-    <div id="userinfo" style="margin:10px">
+<div>
+  <div id="box">
+    <div id="userinfo" >
       <div class="figure" style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
         <img src="" alt="nf">
       </div>
@@ -8,9 +8,9 @@
         {{this.fullname}} </div>
       <form #messform="ngForm" style="margin-top:10px;text-align: center">
         <label for="message" style="display:block;text-align: center"> Just leave a Message</label>
-        <textarea name="message" id="message" rows="5" style="width:100%;margin:0px auto;padding:10px;" [(ngModel)]="addMessage"
+        <textarea name="message" id="message" rows="5" [(ngModel)]="addMessage"
           required #message="ngModel"></textarea>
-        <button [disabled]="message.invalid" class="btn btn-success" (click)="send()"> Send </button>
+        <button [disabled]="message.invalid" (click)="send()"> Send </button>
       </form>
     </div>
   </div>
