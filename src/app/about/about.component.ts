@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AjaxCallService } from '../ajax-call.service';
 
 @Component({
   selector: 'app-about',

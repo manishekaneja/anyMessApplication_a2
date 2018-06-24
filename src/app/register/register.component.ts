@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataBlock } from '../jsons/DataClasses';
 import { AjaxCallService } from '../ajax-call.service';
-import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

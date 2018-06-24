@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AjaxCallService } from '../ajax-call.service';
-import { Message } from '../jsons/DataClasses';
 
 @Component({
   selector: 'app-home',

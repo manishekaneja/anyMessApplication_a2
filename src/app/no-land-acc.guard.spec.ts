@@ -1,15 +1,15 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 
-import { LandAtDashboardGuard } from './no-land-acc.guard';
+import { LandAtGuard } from './no-land-acc.guard';
 
 describe('NoLandAccGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LandAtDashboardGuard]
+      providers: [LandAtGuard]
     });
   });
 
-  it('should ...', inject([LandAtDashboardGuard], (guard: LandAtDashboardGuard) => {
+  it('should ...', inject([LandAtGuard], (guard: LandAtGuard) => {
     expect(guard).toBeTruthy();
   }));
 });

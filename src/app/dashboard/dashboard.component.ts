@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Message, DataBlock } from '../jsons/DataClasses';
+import {  DataBlock } from '../jsons/DataClasses';
 import { AjaxCallService } from '../ajax-call.service';
 
 @Component({

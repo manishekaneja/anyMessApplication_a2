@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { DataBlock, Message } from './jsons/DataClasses';
 import { HttpClient } from '@angular/common/http';
-import { Subscription, ISubscription } from 'rxjs/Subscription';
-import { Subscribable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 @Injectable()
 export class AjaxCallService {
   userdata: DataBlock;

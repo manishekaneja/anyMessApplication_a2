@@ -1,6 +1,5 @@
 ; import { Component, OnInit } from '@angular/core';
 import { AjaxCallService } from '../ajax-call.service';
-import { Message } from '../jsons/DataClasses';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Router } from '@angular/router';
 

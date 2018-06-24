@@ -10,7 +10,6 @@ import { ErrorBoxComponent } from './error-box/error-box.component'
 import { SettingComponent } from './setting/setting.component';
 import { UserMessageComponent } from './user-message/user-message.component';
 import { LandAtGuard } from './no-land-acc.guard';
-import { AjaxCallService } from './ajax-call.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: "full" },
