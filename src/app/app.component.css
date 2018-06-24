@@ -2,7 +2,7 @@
 .containEverything{
     padding: 4.5vh 10vw;
 }
-@media(max-width:425px){
+@media(max-width:768px){
     .containEverything{
         padding: 4.5vh 2vw;
     }
