@@ -2,9 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { RoutingModule } from './routing.module';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
@@ -25,6 +27,7 @@ import { EqualCheckDirective } from './equal-check.directive';
 @NgModule({
   declarations: [
     AppComponent,
+    
     DashboardComponent,
     HomeComponent,
     ContactComponent,
@@ -43,8 +46,8 @@ import { EqualCheckDirective } from './equal-check.directive';
   imports: [
     FormsModule,
     BrowserModule,
-    HttpClientModule,
-    AppRoutingModule
+    RoutingModule,
+    HttpClientModule
   ],
   providers: [AjaxCallService,LandAtGuard],
   bootstrap: [AppComponent]
