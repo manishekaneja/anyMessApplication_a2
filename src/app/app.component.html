@@ -1,6 +1,10 @@
-<div>
-    <app-header></app-header>
-    <div class="containEverything">
-        <router-outlet></router-outlet>
-    </div>
-</div>
+<mat-sidenav-container class="sidebar-container">
+    <mat-sidenav #sidenav class="drawer_styles" position="end">
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header></app-header>
+        <div class="contain-everything">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

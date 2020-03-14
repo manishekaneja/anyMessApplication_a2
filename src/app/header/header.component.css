@@ -1,43 +1,82 @@
 
-.header_styles{
-    position: fixed;
-    top:0px;
-    left: 0px;
+.header-styles {
+  position: fixed;
+  top: 0px;
+  left: 0px;
 }
 
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
 
+.logo {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff !important;
+  transition: 0.5s;
+  margin: 0px 2em !important;
+}
 
-.navbar-right li a{
-    color:white;
-    transition: 0.5s;
-    margin: auto 5px;
-    font-size: 1.2em;
+.navbar-styles {
+  display: flex;
+  color: white;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  align-items: stretch;
 }
-.nav.navbar-nav{
-    text-align: center;
+
+.navbar-styles > li {
+  font-size: 1.1rem;
+  transition: 0s;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
 }
-.navbar-right li a:hover{
-    color: rgb(255, 179, 179)!important;
- }
- .navbar.navbar-default{
-    color:white!important;
-    background-color:#353535;
- }
- .logo{
-     font-size: 1.3em;
-     color: #fff!important;
-     transition: 0.5s;
-     margin: 0px 2em!important;
- }
-     @media(max-width:425px){
-        .logo{
-            margin: 0px 0.2em!important;
-        }
-        
-     }
-.logo:hover{
-    text-shadow: black 0px 0px 20px;    
+
+.navbar-styles > li > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 25px;
 }
-.point{
-    cursor:pointer;
+
+.navbar-styles > li:hover {
+  background-color: rgba(25, 25, 25, 0.3);
+}
+
+.logo:hover {
+  text-shadow: black 0.5px 0.7px 5px;
+  text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+  .navbar-styles > li {
+    font-size: 1rem;
+  }
+  .navbar-styles > li > a {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-styles {
+    display: none;
+  }
+}
+
+@media (max-width: 425px) {
+  .logo {
+    margin: 0px 0.2em !important;
+    font-size: 1rem;
+  }
 }

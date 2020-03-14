@@ -1,30 +1,10 @@
 <header>
-  <mat-toolbar color="primary" class="header_styles" >
-    <mat-toolbar-row class="mat-elevation-z8">
-      <h1>as</h1>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <mat-toolbar color="primary">
-  </mat-toolbar>
-</header>
-
-
-
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="logo navbar-brand " routerLink="/home">MessageME</a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
+  <mat-toolbar color="primary" class="header-styles">
+    <mat-toolbar-row class="mat-elevation-z8 header-row">
+      <div class="logo">
+        <a routerLink="/home">MessageME</a>
+      </div>
+      <ul class="navbar-styles">
         <li>
           <a routerLink="/">Home</a>
         </li>
@@ -40,7 +20,7 @@
         <li *ngIf="this.ajax.loggedInUser">
           <a routerLink="/account/settings">Setting</a>
         </li>
-        <li *ngIf="this.ajax.loggedInUser" class="point">
+        <li *ngIf="this.ajax.loggedInUser" class="isPointer">
           <a (click)="removeId()">Logout</a>
         </li>
         <li>
@@ -50,6 +30,8 @@
           <a routerLink="/contact">ContactME</a>
         </li>
       </ul>
-    </div>
-  </div>
-</nav>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-toolbar color="primary">
+  </mat-toolbar>
+</header>
