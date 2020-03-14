@@ -7,5 +7,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
     imports: [MatButtonModule, MatToolbarModule, MatSidenavModule],
+    exports: [MatButtonModule, MatToolbarModule, MatSidenavModule]
 })
 export class MaterialModule { }

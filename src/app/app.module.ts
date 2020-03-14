@@ -48,10 +48,10 @@ import { MaterialModule } from './material.module';
   imports: [
     FormsModule,
     BrowserModule,
-    MaterialModule,
     HttpClientModule,
     RoutingModule,
     BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [AjaxCallService, LandAtGuard],
   bootstrap: [AppComponent]
