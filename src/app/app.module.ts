@@ -22,12 +22,13 @@ import { UserMessageComponent } from './user-message/user-message.component';
 import { LandAtGuard } from './no-land-acc.guard';
 import { AjaxCallService } from './ajax-call.service';
 import { EqualCheckDirective } from './equal-check.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+
     DashboardComponent,
     HomeComponent,
     ContactComponent,
@@ -46,10 +47,11 @@ import { EqualCheckDirective } from './equal-check.directive';
   imports: [
     FormsModule,
     BrowserModule,
+    HttpClientModule,
     RoutingModule,
-    HttpClientModule
+    BrowserAnimationsModule
   ],
-  providers: [AjaxCallService,LandAtGuard],
+  providers: [AjaxCallService, LandAtGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
