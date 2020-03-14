@@ -1,3 +1,12 @@
+
+.header_styles{
+    position: fixed;
+    top:0px;
+    left: 0px;
+}
+
+
+
 .navbar-right li a{
     color:white;
     transition: 0.5s;

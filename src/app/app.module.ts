@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { RoutingModule } from './routing.module';
 
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
@@ -52,7 +53,6 @@ import { MaterialModule } from './material.module';
     HttpClientModule,
     RoutingModule,
     BrowserAnimationsModule,
-
   ],
   providers: [AjaxCallService, LandAtGuard],
   bootstrap: [AppComponent]

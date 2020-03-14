@@ -1,50 +1,55 @@
 <header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-          aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="logo navbar-brand " routerLink="/home">MessageME</a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a routerLink="/">Home</a>
-          </li>
-          <li *ngIf="!this.ajax.loggedInUser">
-            <a routerLink="/account/login">Login</a>
-          </li>
-          <li *ngIf="!this.ajax.loggedInUser">
-            <a routerLink="/account/register">Register</a>
-          </li>
-          <li *ngIf="this.ajax.loggedInUser">
-            <a routerLink="/account">Dashboard</a>
-          </li>
-          <li *ngIf="this.ajax.loggedInUser">
-            <a routerLink="/account/settings">Setting</a>
-          </li>
-          <li *ngIf="this.ajax.loggedInUser" class="point">
-            <a (click)="removeId()">Logout</a>
-          </li>
-          <li>
-            <a routerLink="/about">About Me</a>
-          </li>
-          <li>
-            <a routerLink="/contact">ContactME</a>
-          </li>
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-  </nav>
-
-
+  <mat-toolbar color="primary" class="header_styles" >
+    <mat-toolbar-row class="mat-elevation-z8">
+      <h1>as</h1>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-toolbar color="primary">
+  </mat-toolbar>
 </header>
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="logo navbar-brand " routerLink="/home">MessageME</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a routerLink="/">Home</a>
+        </li>
+        <li *ngIf="!this.ajax.loggedInUser">
+          <a routerLink="/account/login">Login</a>
+        </li>
+        <li *ngIf="!this.ajax.loggedInUser">
+          <a routerLink="/account/register">Register</a>
+        </li>
+        <li *ngIf="this.ajax.loggedInUser">
+          <a routerLink="/account">Dashboard</a>
+        </li>
+        <li *ngIf="this.ajax.loggedInUser">
+          <a routerLink="/account/settings">Setting</a>
+        </li>
+        <li *ngIf="this.ajax.loggedInUser" class="point">
+          <a (click)="removeId()">Logout</a>
+        </li>
+        <li>
+          <a routerLink="/about">About Me</a>
+        </li>
+        <li>
+          <a routerLink="/contact">ContactME</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
