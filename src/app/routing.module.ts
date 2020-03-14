@@ -11,7 +11,7 @@ import { SettingComponent } from './setting/setting.component';
 import { UserMessageComponent } from './user-message/user-message.component';
 import { LandAtGuard } from './no-land-acc.guard';
 
-const routes: Routes = [
+const APPLICATION_ROUTES: Routes = [
   { path: '', component: HomeComponent, pathMatch: "full" },
   {
     path: 'account', children: [
@@ -30,8 +30,8 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(APPLICATION_ROUTES)],
   exports: [RouterModule],
   providers: []
 })
-export class AppRoutingModule { }
+export class RoutingModule { }
