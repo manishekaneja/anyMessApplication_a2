@@ -23,6 +23,7 @@ import { LandAtGuard } from './no-land-acc.guard';
 import { AjaxCallService } from './ajax-call.service';
 import { EqualCheckDirective } from './equal-check.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -47,9 +48,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     FormsModule,
     BrowserModule,
+    MaterialModule,
     HttpClientModule,
     RoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
   ],
   providers: [AjaxCallService, LandAtGuard],
   bootstrap: [AppComponent]
