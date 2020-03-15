@@ -17,7 +17,7 @@ export class AjaxCallService {
     this.userdata.password = data.password || this.userdata.password;
   }
 
-  readonly URL:string="http://localhost:4000";
+  readonly URL:string="http://anonym0us.herokuapp.com";
 
   constructor(private http: HttpClient, private router: Router) {
     this.userdata = new DataBlock("", "", "", "", "", [], "");

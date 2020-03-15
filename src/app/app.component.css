@@ -6,6 +6,9 @@
   right: 0;
   background-color: transparent;
 }
+.drawer-styles{
+  width:300px;
+}
 .contain-everything {
   padding: 4.5vh 10vw;
 }

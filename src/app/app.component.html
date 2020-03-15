@@ -1,8 +1,38 @@
 <mat-sidenav-container class="sidebar-container">
-    <mat-sidenav #sidenav class="drawer_styles" position="end">
+    <mat-sidenav #sidenav class="drawer-styles" position="end">
+        <mat-nav-list>
+            <a mat-list-item class="tc" routerLink="/">
+                Home
+            </a>
+            <a mat-list-item class="tc" routerLink="/account/login" *ngIf="!this.ajax.loggedInUser">
+                Login
+            </a>
+            <a mat-list-item class="tc" routerLink="/account/register" *ngIf="!this.ajax.loggedInUser">
+                Register
+            </a>
+            <a mat-list-item class="tc" routerLink="/account" *ngIf="this.ajax.loggedInUser">
+                Dashboard
+            </a>
+            <a mat-list-item class="tc" routerLink="/account/settings" *ngIf="this.ajax.loggedInUser">
+                Setting
+            </a>
+            <a mat-list-item class="tc" routerLink="/about">
+                AboutME
+            </a>
+            <a mat-list-item class="tc" routerLink="/contact">
+                ContactME
+            </a>
+        </mat-nav-list>
+        <mat-divider></mat-divider>
+        <mat-action-list *ngIf="this.ajax.loggedInUser">
+            <button mat-list-item class="tc" (click)="performLogoutAction()">
+                Log Out
+            </button>
+        </mat-action-list>
+        <mat-divider *ngIf="this.ajax.loggedInUser"></mat-divider>
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-header></app-header>
+        <app-header [isLoggedIn]="this.ajax.loggedInUser" (openDrawer)="openSideNavbar()" (performLogout)="performLogoutAction()"></app-header>
         <div class="contain-everything">
             <router-outlet></router-outlet>
         </div>

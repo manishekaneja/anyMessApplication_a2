@@ -36,6 +36,28 @@ a:active {
   height: 100%;
 }
 
+.px-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.tc > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.py-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.flxr {
+  display: flex;
+}
+.jcc{
+  justify-content: center;
+}
+.ais{
+  align-items: stretch;
+}
 @media (max-width: 1024px) {
   html {
     font-size: 18px;
