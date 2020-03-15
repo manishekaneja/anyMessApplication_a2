@@ -52,11 +52,30 @@ a:active {
 .flxr {
   display: flex;
 }
+.flxc{
+  display: flex;
+  flex-direction: column;
+}
 .jcc{
   justify-content: center;
 }
 .ais{
   align-items: stretch;
+}
+.mb15{
+  margin-bottom: 15px;
+}
+.pb15{
+  padding-bottom: 15px;
+}
+.text-c{
+  text-align: center;
+}
+.text-l{
+  text-align: left;
+}
+.text-r{
+  text-align: right;
 }
 @media (max-width: 1024px) {
   html {

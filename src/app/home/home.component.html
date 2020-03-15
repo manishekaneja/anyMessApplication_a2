@@ -1,30 +1,56 @@
-<div class="whole">
-  <p>Get feedback from your coworkers and friends
-  </p>
-  <div class="two_col_points">
-    <div class="left">
-      <h3>
-        <strong>At Work</strong>
-      </h3>
-      <ul>
-        <li>Enhance your areas of strength</li>
-        <li>Strengthen Areas for Improvement</li>
-      </ul>
+<mat-card class="flxc parent-card mat-elevation-z0">
+  <mat-card-title class="pb15 text-c title">
+    Get feedback from your coworkers and friends
+  </mat-card-title>
+  <mat-card-content>
+    <div class="flxc ais">
+      <mat-card class="mb15 mat-elevation-z8 light-back">
+        <mat-card-title>
+          At Work
+        </mat-card-title>
+        <mat-list class="mx2rem">
+          <mat-list-item>Enhance your areas of strength</mat-list-item>
+          <mat-list-item>Strengthen Areas for Improvement</mat-list-item>
+        </mat-list>
+      </mat-card>
+      <mat-card class="mb15 mat-elevation-z8 light-back">
+        <mat-card-title>
+          With Your Friends
+        </mat-card-title>
+        <mat-list class="mx2rem">
+          <mat-list-item>Improve your friendship by discovering your strengths and areas for improvement</mat-list-item>
+          <mat-list-item>Let your friends be honest with you</mat-list-item>
+        </mat-list>
+      </mat-card>
+
+      <!-- <div class="left">
+        <h3>
+          <strong>At Work</strong>
+        </h3>
+        <ul>
+          <li>Enhance your areas of strength</li>
+          <li>Strengthen Areas for Improvement</li>
+        </ul>
+
+      </div>
+
+      <div class="right">
+        <h3>
+          <strong>With Your Friends</strong>
+        </h3>
+        <ul>
+          <li>Improve your friendship by discovering your strengths and areas for improvement</li>
+          <li>Let your friends be honest with you</li>
+        </ul>
+      </div> -->
     </div>
-    <div class="right">
-      <h3>
-        <strong>With Your Friends</strong>
-      </h3>
-      <ul>
-        <li>Improve your friendship by discovering your strengths and areas for improvement</li>
-        <li>Let your friends be honest with you</li>
-      </ul>
-    </div>
-    <div id="full" *ngIf="!isLoggedIn">
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="text-c" *ngIf="!isLoggedIn">
       <strong>
         <a routerLink="/account/register">Register</a> |
         <a routerLink="/account/login">Login</a>
       </strong>
     </div>
-  </div>
-</div>
+  </mat-card-footer>
+</mat-card>
