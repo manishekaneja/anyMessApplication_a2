@@ -6,8 +6,8 @@
   right: 0;
   background-color: transparent;
 }
-.drawer-styles{
-  width:300px;
+.drawer-styles {
+  width: 300px;
 }
 .contain-everything {
   padding: 4.5vh 10vw;
@@ -17,5 +17,10 @@
   .containEverything {
     padding: 4.5vh 2vw;
   }
+}
 
+@media (max-width: 425px) {
+  .contain-everything {
+    padding: 1.5rem 1rem;
+  }
 }

@@ -51,12 +51,21 @@ a:active {
 }
 .flxr {
   display: flex;
+  flex-direction: row;
 }
-.jcc{
+.flxc {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.jcc {
   justify-content: center;
 }
-.ais{
+.ais {
   align-items: stretch;
+}
+.aic {
+  align-items: center;
 }
 @media (max-width: 1024px) {
   html {
