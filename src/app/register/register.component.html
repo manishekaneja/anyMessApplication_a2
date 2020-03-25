@@ -45,7 +45,7 @@
           Re-enter to confirm your password
         </mat-label>
         <input matInput type="password" name="cpassword" placeholder="Re-enter Password here" required appEqualCheck
-          [equalCheck]="data.password" maxlength="16" [(ngModel)]="data.cpassword" #cpassword="ngModel">
+          [equalCheck]="data.password" maxlength="16" [(ngModel)]="passwordConfirmed" #cpassword="ngModel">
         <mat-error *ngIf="cpassword.invalid && (cpassword.touched || cpassword.dirty) && cpassword.errors.required">
           Please confirm your password
         </mat-error>
