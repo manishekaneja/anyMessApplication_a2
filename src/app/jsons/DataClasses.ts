@@ -1,5 +1,3 @@
-import { Validators } from '@angular/forms';
-
 export class Message {
   constructor(public message: string, public fav: boolean) { }
 }
@@ -21,7 +19,10 @@ export class DataBlock {
     return this._messages.length;
   }
   public emailValid() {
-    return Validators.email(this._email)
+    return !!this._email.match(/^([a-zA-Z0-9_\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})/);
+  }
+  public passwordValid() {
+    return this._password.length >= 4 && this._password.length <= 16;
   }
   set email(email: string) {
     this._email = email;
