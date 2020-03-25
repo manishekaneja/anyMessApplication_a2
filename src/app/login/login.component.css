@@ -1,7 +1,7 @@
 .login-container {
   margin: 0.5em;
   padding: 5rem;
-  background-color:rgba(255,255,255,0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   display: flex;
   max-width: 40rem;
   margin: auto;
@@ -49,4 +49,7 @@ input:-webkit-autofill {
   -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
   -webkit-animation-name: autofill;
   -webkit-animation-fill-mode: both;
+}
+mat-form-field {
+  margin-bottom: 10px;
 }
