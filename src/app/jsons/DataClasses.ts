@@ -30,5 +30,10 @@ export class DataBlock {
   set password(password: string) {
     this._password = password;
   }
-
+  set fullname(fullname: string) {
+    this._fullname = fullname;
+  }
+  set messages(messages: Array<Message>) {
+    this._messages = messages;
+  }
 }

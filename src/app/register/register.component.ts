@@ -7,36 +7,38 @@ import { AjaxCallService } from '../ajax-call.service';
   styleUrls: ['./register.component.css', '../jsons/validation.css'],
   providers: []
 })
-export class RegisterComponent{
-  invalidAttempt = false;
-  registered = false;
-  wait = false;
-  data = new DataBlock("", "", "", "", "");
+export class RegisterComponent {
+  invalidAttempt: boolean = false;
+  isRegistered: boolean = false;
+  waitngForResponse: boolean = false;
+  passwordConfirmed: string = '';
+  data = new DataBlock();
 
-  constructor(public ajaxCall: AjaxCallService) {
+  constructor(private ajaxCall: AjaxCallService) {
   }
 
   doRegister(): void {
-    this.invalidAttempt = false;
-    this.registered = false;
-    this.wait = true;
-    if (this.data.cpassword === this.data.password) {
-      this.ajaxCall.doRegister(this.data).subscribe((data) => {
-        let response: any = data;
-        if (response.valid == true) {
-          this.wait = false;
-          this.registered = true;
-        }
-        else {
-          this.wait = false;
-          this.invalidAttempt = true;
-        }
-      })
-    }
-    else {
-      this.wait = false;
-      this.invalidAttempt = true;
-    }
+    console.log(this.data)
+    // this.invalidAttempt = false;
+    // this.registered = false;
+    // this.wait = true;
+    // if (this.data.cpassword === this.data.password) {
+    //   this.ajaxCall.doRegister(this.data).subscribe((data) => {
+    //     let response: any = data;
+    //     if (response.valid == true) {
+    //       this.wait = false;
+    //       this.registered = true;
+    //     }
+    //     else {
+    //       this.wait = false;
+    //       this.invalidAttempt = true;
+    //     }
+    //   })
+    // }
+    // else {
+    //   this.wait = false;
+    //   this.invalidAttempt = true;
+    // }
   }
 
 }
