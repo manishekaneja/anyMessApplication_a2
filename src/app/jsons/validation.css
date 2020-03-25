@@ -1,8 +1,8 @@
-.ng-valid[required],.ng-valid.required{
+/* .ng-valid[required],.ng-valid.required{
     border-left:green 5px solid!important;
     transition: 0.5s;
 }
 .ng-invalid[required],.ng-invalid.ng-touched.required{
     border-left:rgb(124, 2, 2) 5px solid!important;
     transition: 0.5s;
-}
+} */

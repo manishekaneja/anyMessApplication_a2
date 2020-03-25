@@ -49,33 +49,46 @@ a:active {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.mt-10 {
+  margin-top: 10px;
+}
 .flxr {
   display: flex;
+  flex-direction: row;
 }
-.flxc{
-  display: flex;
+.flxc {
+  display: flex !important;
   flex-direction: column;
 }
-.jcc{
+
+.jcc {
   justify-content: center;
 }
-.ais{
+.ais {
   align-items: stretch;
 }
-.mb15{
+.aic {
+  align-items: center;
+}
+.mb15 {
   margin-bottom: 15px;
 }
-.pb15{
+.pb15 {
   padding-bottom: 15px;
 }
-.text-c{
+.text-c {
   text-align: center;
 }
-.text-l{
+.text-l {
   text-align: left;
 }
-.text-r{
+.text-r {
   text-align: right;
+}
+.error-message-box {
+  margin-top: 10px;
+  background-color: rgba(244, 67, 54, 0.8);
+  color: whitesmoke;
 }
 @media (max-width: 1024px) {
   html {
