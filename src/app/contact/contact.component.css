@@ -1,21 +1,17 @@
-h2{
+mat-card-title{
     color: white;
     text-align: center;
     font-weight: 100;
-    padding: 1px 2em;
+    padding:1rem 2rem;
     background-color: rgba(0,0,0,0.5);
     border-radius: 2px;
     display: inline-block;
 }
-@media(max-width:425px){
-    h2{
-        width: 100%;
-    }
-}
-h4{
-    margin-left: 1em;
-    margin-bottom: 0.3em;
-    font-size: 1.5em;
+.red{
+    margin-left: 1rem;
+    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+    color: #333;
     display: block;
 }
 .line{
