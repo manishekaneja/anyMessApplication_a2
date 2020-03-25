@@ -90,6 +90,15 @@ a:active {
   background-color: rgba(244, 67, 54, 0.8);
   color: whitesmoke;
 }
+.card-back {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.trans-card-back {
+  background-color: transparent;
+}
+.p0 {
+  padding: 0px!important;
+}
 @media (max-width: 1024px) {
   html {
     font-size: 18px;
