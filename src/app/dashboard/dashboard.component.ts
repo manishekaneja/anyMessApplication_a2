@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  DataBlock } from '../jsons/DataClasses';
+import { DataBlock } from '../jsons/DataClasses';
 import { AjaxCallService } from '../ajax-call.service';
 
 @Component({
@@ -12,12 +12,12 @@ export class DashboardComponent implements OnInit {
   details: any;
   showthis: boolean;
   constructor(public ajax: AjaxCallService) {
-    this.details = new DataBlock("", "", "", "", "", [], "");
+    this.details = new DataBlock();
     this.showthis = true;
   }
 
   ngOnInit() {
     this.ajax.preCheck();
-      this.details = this.ajax.userdata;
+    this.details = this.ajax.userdata;
   }
 }
