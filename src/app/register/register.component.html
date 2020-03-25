@@ -6,44 +6,61 @@
     <form #myform="ngForm">
       <mat-form-field>
         <mat-label>
-          Enter Full Name
+          What is your Fullname?
         </mat-label>
-        <input matInput type="text" id="fullName" name="fullName" required placeholder="Enter your Full Name here"
-          required [(ngModel)]="data.fullName" #username="ngModel">
+        <input matInput type="text" name="fullname" placeholder="Write your complete name here" required
+          [(ngModel)]="data.fullname" #fullname="ngModel">
+        <mat-error *ngIf="fullname.invalid && (fullname.touched || fullname.dirty) && fullname.errors.required">
+          Please enter an your full name.
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>
-          Enter Username
+          Provide your Email Id.
         </mat-label>
-        <input matInput type="text" id="username" name="username" required placeholder="Enter Username here" required
-          [(ngModel)]="data.username" #username="ngModel">
+        <input matInput type="email" name="email" pattern="^([a-zA-Z0-9_\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+          placeholder="Enter your email here" required [(ngModel)]="data.email" #email="ngModel">
+        <mat-error *ngIf="email.invalid && (email.touched || email.dirty) && email.errors.required">
+          Please enter an email address.
+        </mat-error>
+        <mat-error *ngIf="email.invalid && (email.touched || email.dirty) && email.errors.pattern">
+          Please enter a valid email address.
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>
-          Enter email
+          Enter Password for your account
         </mat-label>
-        <input matInput type="text" id="email" name="email"
-          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" placeholder="Enter Email here" required
-          [(ngModel)]="data.email" #username="ngModel">
+        <input matInput type="password" name="password" placeholder="Enter your password here" required minlength="4"
+          maxlength="16" [(ngModel)]="data.password" #password="ngModel">
+        <mat-error *ngIf="password.invalid && (password.touched || password.dirty) && password.errors.required">
+          Please enter your password to continue.
+        </mat-error>
+        <mat-error *ngIf="password.invalid && (password.touched || password.dirty) && (password.errors.minlength) ">
+          Password Length should have minimum 4 characters.
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>
-          Enter Password
+          Re-enter to confirm your password
         </mat-label>
-        <input matInput type="password" name="password" id="password" placeholder="Enter Password here" required
-          minlength="4" maxlength="16" [(ngModel)]="data.password" #password="ngModel">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>
-          Confirm Password
-        </mat-label>
-        <input matInput type="password" name="cpassword" id="cpassword" laceholder="Re-enter Password here" required
-          appEqualCheck [equalCheck]="data.password" maxlength="16" [(ngModel)]="data.cpassword" #cpassword="ngModel">
+        <input matInput type="password" name="cpassword" placeholder="Re-enter Password here" required appEqualCheck
+          [equalCheck]="data.password" maxlength="16" [(ngModel)]="data.cpassword" #cpassword="ngModel">
+        <mat-error *ngIf="cpassword.invalid && (cpassword.touched || cpassword.dirty) && cpassword.errors.required">
+          Please confirm your password
+        </mat-error>
+        <mat-error
+          *ngIf="cpassword.invalid && (cpassword.touched || cpassword.dirty) && !cpassword.errors.required && cpassword.errors.notPassword">
+          Both password don't match
+        </mat-error>
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit" [disabled]="!myform.form.valid"
         (click)="doRegister()">Register</button>
-      <span>*
+      <mat-card *ngIf="this.invalidAttempt" class="error-message-box">
+        {{this.invalidAttempMessage}} Username or password in incorrect. Please try with correct credintials.
+      </mat-card>
+      <span *ngIf="!this.invalidAttempt">*
         <span style="font-size:10px;"> All fields are mandatory</span>
       </span>
       <a routerLink="/account/login">

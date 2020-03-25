@@ -29,14 +29,16 @@
         <mat-error *ngIf="password.invalid && (password.touched || password.dirty) && (password.errors.minlength) ">
           Password Length should have minimum 4 characters.
         </mat-error>
+        <mat-error *ngIf="password.invalid && (password.touched || password.dirty) && (password.errors.minlength) ">
+          Password Length should have minimum 4 characters.
+        </mat-error>
       </mat-form-field>
 
       <button mat-raised-button color="primary" [disabled]="!myform.form.valid" (click)="doLogin()">Login</button>
       <mat-card *ngIf="this.invalidAttempt" class="error-message-box">
         Username or password in incorrect. Please try with correct credintials.
       </mat-card>
-
-      <a style="outline:none;" routerLink="/account/register">
+      <a class="mt-10" routerLink="/account/register">
         Register
       </a>
     </form>

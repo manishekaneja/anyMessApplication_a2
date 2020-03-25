@@ -49,6 +49,9 @@ a:active {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.mt-10{
+  margin-top: 10px;
+}
 .flxr {
   display: flex;
   flex-direction: row;
