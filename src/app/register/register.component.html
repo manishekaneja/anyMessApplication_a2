@@ -11,7 +11,7 @@
         <input matInput type="text" name="fullname" placeholder="Write your complete name here" required
           [(ngModel)]="data.fullname" #fullname="ngModel">
         <mat-error *ngIf="fullname.invalid && (fullname.touched || fullname.dirty) && fullname.errors.required">
-          Please enter an your full name.
+          Please enter your full name.
         </mat-error>
       </mat-form-field>
       <mat-form-field>
