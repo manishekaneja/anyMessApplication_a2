@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { DataBlock } from '../jsons/DataClasses';
 import { AjaxCallService } from '../ajax-call.service';
 
@@ -7,17 +7,18 @@ import { AjaxCallService } from '../ajax-call.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnChanges {
 
-  details: any;
-  showthis: boolean;
+  details: DataBlock = new DataBlock();
   constructor(public ajax: AjaxCallService) {
     this.details = new DataBlock();
-    this.showthis = true;
   }
 
   ngOnInit() {
     this.ajax.preCheck();
     this.details = this.ajax.userdata;
+  }
+  ngOnChanges() {
+    this.details = this.ajax.userdata
   }
 }

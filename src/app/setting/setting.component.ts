@@ -11,7 +11,7 @@ export class SettingComponent implements OnInit {
   invalidAttempt = false;
   registered = false;
   wait = false;
-  data = new DataBlock("", "", "", "", "");
+  data = new DataBlock();
   constructor(public ajaxCall: AjaxCallService) {
   }
   ngOnInit() {

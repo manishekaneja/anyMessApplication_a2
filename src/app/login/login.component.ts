@@ -18,9 +18,6 @@ export class LoginComponent {
     this.data = new DataBlock();
   }
 
-  public click(a): void {
-    console.log(a);
-  }
 
   public doLogin(): void {
     this.ajaxCall.doLogin(this.data).subscribe(data => {
