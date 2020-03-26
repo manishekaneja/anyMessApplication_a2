@@ -64,7 +64,7 @@ export class AjaxCallService {
   }
   //Send the data block and recives boolean
   doRegister(data: DataBlock): Observable<any> {
-    return this.http.post(this.URL + "/register", data);
+    return this.http.post(this.URL + "/register", data.getRegiterDataFormat());
   }
 
   doUpdate(data: DataBlock): Observable<any> {
