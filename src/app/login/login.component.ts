@@ -24,7 +24,6 @@ export class LoginComponent {
 
   public doLogin(): void {
     this.ajaxCall.doLogin(this.data).subscribe(data => {
-      console.log(data);
       let response: any = data;
       if (response.valid) {
         localStorage.tokenID = response.token;
