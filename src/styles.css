@@ -87,9 +87,20 @@ a:active {
 }
 .error-message-box {
   margin-top: 10px;
-  background-color: rgba(244, 67, 54, 0.8);
+  background-color: rgba(244, 67, 54, 0.7);
   color: whitesmoke;
 }
+.info-message-box {
+  margin-top: 10px;
+  background-color: rgb(63, 81, 181, 0.7);
+  color: whitesmoke;
+}
+.success-message-box {
+  margin-top: 10px;
+  background-color: rgba(38, 250, 38, 0.7);
+  color: whitesmoke;
+}
+
 .card-back {
   background-color: rgba(255, 255, 255, 0.7);
 }
@@ -97,7 +108,7 @@ a:active {
   background-color: transparent;
 }
 .p0 {
-  padding: 0px!important;
+  padding: 0px !important;
 }
 @media (max-width: 1024px) {
   html {

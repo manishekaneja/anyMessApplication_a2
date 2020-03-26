@@ -8,37 +8,49 @@ import { AjaxCallService } from '../ajax-call.service';
   providers: []
 })
 export class RegisterComponent {
+  registerClicked: boolean = false;
   invalidAttempt: boolean = false;
   isRegistered: boolean = false;
-  waitngForResponse: boolean = false;
+  waitingForResponse: boolean = false;
   passwordConfirmed: string = '';
   data = new DataBlock();
 
   constructor(private ajaxCall: AjaxCallService) {
   }
 
-  doRegister(): void {
-    console.log(this.data)
-    // this.invalidAttempt = false;
-    // this.registered = false;
-    // this.wait = true;
-    // if (this.data.cpassword === this.data.password) {
-    //   this.ajaxCall.doRegister(this.data).subscribe((data) => {
-    //     let response: any = data;
-    //     if (response.valid == true) {
-    //       this.wait = false;
-    //       this.registered = true;
-    //     }
-    //     else {
-    //       this.wait = false;
-    //       this.invalidAttempt = true;
-    //     }
-    //   })
-    // }
-    // else {
-    //   this.wait = false;
-    //   this.invalidAttempt = true;
-    // }
+  private validate(): boolean {
+    return this.data.fullname &&
+      this.data.fullname.length > 0 &&
+      this.data.emailValid() &&
+      this.data.passwordValid() &&
+      this.data.password === this.passwordConfirmed;
+  }
+
+  public doRegister(): void {
+    this.invalidAttempt = false;
+    this.isRegistered = false;
+    this.waitingForResponse = true;
+    this.registerClicked = true;
+
+    if (this.validate()) {
+      this.ajaxCall.doRegister(this.data).subscribe(data => {
+        let response: any = data;
+        this.invalidAttempt = false;
+        if (response.valid) {
+          this.waitingForResponse = false;
+          this.isRegistered = true;
+        }
+        else {
+          this.waitingForResponse = false;
+          this.isRegistered = false;
+        }
+      })
+    }
+    else {
+      this.waitingForResponse = false;
+      this.isRegistered = false;
+      this.invalidAttempt = true;
+    }
   }
 
 }

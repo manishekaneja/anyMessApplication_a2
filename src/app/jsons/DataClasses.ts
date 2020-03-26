@@ -36,4 +36,11 @@ export class DataBlock {
   set messages(messages: Array<Message>) {
     this._messages = messages;
   }
+  public getRegiterDataFormat(): Object {
+    return {
+      "fullname": this._fullname,
+      "email": this._email,
+      "password": this._password
+    }
+  }
 }
