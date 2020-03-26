@@ -2,7 +2,9 @@ export class Message {
   constructor(public message: string, public fav: boolean) { }
 }
 export class DataBlock {
-  constructor(private _email?: string, private _password?: string, private _fullname?: string, private _messages?: Message[], private _tokenID?: string) { }
+  constructor(private _email?: string, private _password?: string, private _fullname?: string, private _messages?: Message[], private _tokenID?: string) {
+    this._messages = _messages || [];
+  }
   get email(): string {
     return this._email || '';
   }

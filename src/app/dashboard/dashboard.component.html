@@ -1,33 +1,38 @@
-<div>
-  <div id="upperbox">
-    <div style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
-      <img src="" alt="nf">
-    </div>
-    <div class="text" style="display:block;text-align: center;font-weight:700;">
-      {{details.username}} </div>
-    <div class="text" style="display:block;text-align: center;font-weight:700;">
-      <span class="bold">
-        <span class="red"> Messages:</span> {{details.messages.length}}
-      </span>
-      <span class="bold">
-        <span class="red"> Fav Message :</span> {{ (details.messages|getFav).length}}</span>
-    </div>
-    <a routerLink="/user/{{details.username}}" class="bold link">{{this.ajax.URL}}/{{details.username}}
-    </a>
+<mat-card class="card-back mat-elevation-z8">
+  <div style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
+    <img src="" alt="nf">
   </div>
-  <div id="lowerbox">
-    <ul class="nav nav-pills nav-justified" role="tablist">
-      <li role="presentation" [ngClass]="{'active':showthis}" (click)="showthis=true;">
-        <a> Received
-        </a>
-      </li>
-      <li role="presentation" [ngClass]="{'active':!showthis}" (click)="showthis=false;">
-        <a> Favorites</a>
-      </li>
-    </ul>
-    <div class="tab-content scroll-box" style="height:400px;overflow-y:scroll;">
-      <app-message-list [myList]="details.messages" *ngIf="showthis"></app-message-list>
-      <app-message-list [myList]="ajax.userdata.messages|getFav" *ngIf="!showthis"></app-message-list>
-    </div>
+  <div class="text" style="display:block;text-align: center;font-weight:700;">
+    {{details.username}}
   </div>
-</div>
+  <div class="text" style="display:block;text-align: center;font-weight:700;">
+    <span class="bold">
+      <span class="red"> Messages:</span>
+      {{details.messages.length}}
+    </span>
+    <span class="bold">
+      <span class="red"> Fav Message :</span>
+      {{ (details.messages|getFav).length}}
+    </span>
+  </div>
+  <a routerLink="/user/{{details.email}}" class="bold link">{{this.ajax.URL}}/{{details.email}}
+  </a>
+</mat-card>
+<mat-card class="card-back mt-10 mat-elevation-z8">
+  <mat-card-content>
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label="Received">
+        <mat-card class="scroll-box">
+          <app-message-list [myList]="details.messages">
+          </app-message-list>
+        </mat-card>
+      </mat-tab>
+      <mat-tab label="Favorites">
+        <mat-card class="scroll-box">
+          <app-message-list [myList]="ajax.userdata.messages|getFav">
+          </app-message-list>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

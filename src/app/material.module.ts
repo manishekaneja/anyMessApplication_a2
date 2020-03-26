@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { TextFieldModule } from '@angular/cdk/text-field';
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
-        TextFieldModule
+        TextFieldModule,
+        MatTabsModule
     ],
     exports: [
         MatButtonModule,
@@ -35,7 +37,8 @@ import { TextFieldModule } from '@angular/cdk/text-field';
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
-        TextFieldModule
+        TextFieldModule,
+        MatTabsModule
     ]
 })
 export class MaterialModule { }
