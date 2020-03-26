@@ -23,20 +23,19 @@ export class LoginComponent {
   }
 
   public doLogin(): void {
-    console.log(this.data);
-    //   this.ajaxCall.doLogin(this.data).subscribe(res => {
-    //     let response: any = res;
-    //     if (response.valid) {
-    //       localStorage.tokenID = response.token;
-    //       this.ajaxCall.loggedInUser = true;
-    //       this.ajaxCall.preCheck().add(() => {
-    //         this.router.navigate(['/account/dashboard']);
-    //       });
-    //     }
-    //     else {
-    //       this.reset();
-    //       this.invalidAttempt = true;
-    //     }
-    //   })
+    this.ajaxCall.doLogin(this.data).subscribe(data => {
+      let response: any = data;
+      if (response.valid) {
+        localStorage.tokenID = response.token;
+        this.ajaxCall.loggedInUser = true;
+        this.ajaxCall.preCheck().add(() => {
+          this.router.navigate(['/account/dashboard']);
+        });
+      }
+      else {
+        this.reset();
+        this.invalidAttempt = true;
+      }
+    })
   }
 }
