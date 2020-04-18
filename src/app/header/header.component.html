@@ -1,46 +1,46 @@
 <header>
-  <mat-toolbar color="primary" class="header-styles">
+  <mat-toolbar class="header-styles header-color">
     <mat-toolbar-row class="mat-elevation-z8 header-row">
       <div class="logo">
-        <a routerLink="/home">MessageME</a>
+        <a routerLink="/">MessageME</a>
       </div>
       <div class="flxr jcc ais">
         <mat-nav-list class="navbar-styles">
-          <a mat-list-item class="tc" routerLink="/">
+          <a mat-list-item routerLink="/">
             Home
           </a>
-          <a mat-list-item class="tc" routerLink="/account/login" *ngIf="!this.isLoggedIn">
+          <a mat-list-item routerLink="/account/login" *ngIf="!this.isLoggedIn">
             Login
           </a>
-          <a mat-list-item class="tc" routerLink="/account/register" *ngIf="!this.isLoggedIn">
+          <a mat-list-item routerLink="/account/register" *ngIf="!this.isLoggedIn">
             Register
           </a>
-          <a mat-list-item class="tc" routerLink="/account" *ngIf="this.isLoggedIn">
+          <a mat-list-item routerLink="/account" *ngIf="this.isLoggedIn">
             Dashboard
           </a>
-          <a mat-list-item class="tc" routerLink="/account/settings" *ngIf="this.isLoggedIn">
+          <a mat-list-item routerLink="/account/settings" *ngIf="this.isLoggedIn">
             Setting
           </a>
-          <a mat-list-item class="tc" routerLink="/about">
+          <a mat-list-item routerLink="/about">
             About ME
           </a>
-          <a mat-list-item class="tc" routerLink="/contact">
+          <a mat-list-item routerLink="/contact">
             ContactME
           </a>
         </mat-nav-list>
         <mat-action-list class="navbar-styles" *ngIf="this.isLoggedIn">
-          <button mat-list-item class="tc" (click)="this.performLogout.emit()">
+          <button mat-list-item (click)="this.performLogout.emit()">
             Log Out
           </button>
         </mat-action-list>
       </div>
       <div class="drawer-button">
-        <button mat-flat-button color="primary" (click)="this.openDrawer.emit()">
+        <button mat-flat-button class="header-color white" (click)="this.openDrawer.emit()">
           <mat-icon>menu</mat-icon>
         </button>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
-  <mat-toolbar color="primary">
+  <mat-toolbar class="header-color">
   </mat-toolbar>
 </header>

@@ -1,31 +1,34 @@
-<div>
-  <div id="box">
-    <div id="userinfo" >
-      <div class="figure" style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
-        <img src="" alt="nf">
-      </div>
-      <div class="text" style="display:block;text-align: center;font-weight:700;">
-        {{this.fullname}} </div>
-      <form #messform="ngForm" style="margin-top:10px;text-align: center">
-        <label for="message" style="display:block;text-align: center"> Just leave a Message</label>
-        <textarea name="message" id="message" rows="5" [(ngModel)]="addMessage"
-          required #message="ngModel"></textarea>
-        <button [disabled]="message.invalid" (click)="send()"> Send </button>
-      </form>
+<mat-card class="card-back mat-elevation-z8">
+  <div id="userinfo">
+    <div class="figure"
+      style="background-color: black;width:100px;height:100px;margin:0px auto;border-radius:50%;overflow:hidden;">
+      <img src="" alt="nf">
     </div>
-  </div>
-  <div class="container col-sm-12" style="margin-top:0px">
-    <div id="successbox" *ngIf="this.succ" class="alert alert-success alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+    <div class="text" style="display:block;text-align: center;font-weight:700;">
+      {{userData.fullname}}
+    </div>
+    <form #messform="ngForm" style="margin-top:10px;width: 100%;">
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Just a leave a message</mat-label>
+        <textarea matInput class="message_box" name="message" id="message" [(ngModel)]="messageObject.message"
+          #message="ngModel" rows="5" placeholder="Type your message over here.........."></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="message.invalid" style="width:100%;" (click)="send()"> Send
       </button>
-      <strong>Your Message has been delivered :)</strong>
-    </div>
-    <div id="failbox" *ngIf="this.failed" class="alert alert-danger alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <strong>Failed to Send the Message :(</strong>
-    </div>
+    </form>
   </div>
-</div>
+</mat-card>
+<!-- <div class="container col-sm-12" style="margin-top:0px"> -->
+<!-- <div id="successbox" *ngIf="this.succ" class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Your Message has been delivered :)</strong>
+  </div> -->
+<!-- <div id="failbox" *ngIf="this.failed" class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Failed to Send the Message :(</strong>
+  </div> -->
+<!-- </div> -->

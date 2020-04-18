@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
-import { AjaxCallService } from '../ajax-call.service';
+import { Component } from "@angular/core";
+import { AjaxCallService } from "../ajax-call.service";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"],
 })
 export class HomeComponent {
-  isLoggedIn;
-  constructor(private ajax: AjaxCallService) { }
+  public isLoggedIn: boolean;
+  private loginFlagSubscriber: Subscription;
+  constructor(private ajaxService: AjaxCallService) {}
   ngOnInit() {
-    this.isLoggedIn = this.ajax.loggedInUser;
+    this.isLoggedIn = this.ajaxService.isLoggedIn;
+    this.loginFlagSubscriber = this.ajaxService.isUserLogedInObserver.subscribe(
+      (isLoggedIn) => {
+        console.log({ isLoggedIn });
+      }
+    );
   }
-  ngOnChange(){
-    this.isLoggedIn = this.ajax.loggedInUser;    
+  ngOnDestroy() {
+    this.loginFlagSubscriber.unsubscribe();
   }
 }

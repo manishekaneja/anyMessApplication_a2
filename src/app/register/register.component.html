@@ -9,8 +9,8 @@
           What is your Fullname?
         </mat-label>
         <input matInput type="text" name="fullname" placeholder="Write your complete name here" required
-          [(ngModel)]="data.fullname" #fullname="ngModel">
-        <mat-error *ngIf="fullname.invalid && (fullname.touched || fullname.dirty) && fullname.errors.required">
+          [(ngModel)]="userData.fullname" #name="ngModel">
+        <mat-error *ngIf="name.invalid && (name.touched || name.dirty) && name.errors.required">
           Please enter your full name.
         </mat-error>
       </mat-form-field>
@@ -19,7 +19,7 @@
           Provide your Email Id.
         </mat-label>
         <input matInput type="email" name="email" pattern="^([a-zA-Z0-9_\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-          placeholder="Enter your email here" required [(ngModel)]="data.email" #email="ngModel">
+          placeholder="Enter your email here" required [(ngModel)]="userData.email" #email="ngModel">
         <mat-error *ngIf="email.invalid && (email.touched || email.dirty) && email.errors.required">
           Please enter an email address.
         </mat-error>
@@ -32,7 +32,7 @@
           Enter Password for your account
         </mat-label>
         <input matInput type="password" name="password" placeholder="Enter your password here" required minlength="4"
-          maxlength="16" [(ngModel)]="data.password" #password="ngModel">
+          maxlength="16" [(ngModel)]="userData.password" #password="ngModel">
         <mat-error *ngIf="password.invalid && (password.touched || password.dirty) && password.errors.required">
           Please enter your password to continue.
         </mat-error>
@@ -45,7 +45,7 @@
           Re-enter to confirm your password
         </mat-label>
         <input matInput type="password" name="cpassword" placeholder="Re-enter Password here" required appEqualCheck
-          [equalCheck]="data.password" maxlength="16" [(ngModel)]="passwordConfirmed" #cpassword="ngModel">
+          [equalCheck]="userData.password" maxlength="16" [(ngModel)]="confirmPasswordValue" #cpassword="ngModel">
         <mat-error *ngIf="cpassword.invalid && (cpassword.touched || cpassword.dirty) && cpassword.errors.required">
           Please confirm your password
         </mat-error>
@@ -53,25 +53,11 @@
           Both password don't match
         </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit" [disabled]="!myform.form.valid"
-        (click)="doRegister()">Register</button>
-      <mat-card *ngIf="this.registerClicked && this.waitingForResponse" class="info-message-box">
-        Please wait to know your registration Status
-      </mat-card>
-      <mat-card *ngIf="this.registerClicked && !this.waitingForResponse && !this.invalidAttempt  && !this.isRegistered"
-        class="error-message-box">
-        Cant register
-      </mat-card>
-      <mat-card *ngIf="this.registerClicked && !this.waitingForResponse && this.invalidAttempt  && !this.isRegistered"
-        class="error-message-box">
-        Name or password in incorrect. Please try with correct credintials.
-      </mat-card>
-      <mat-card *ngIf="this.registerClicked && !this.waitingForResponse && !this.invalidAttempt && this.isRegistered"
-        class="success-message-box">
-        Done
-      </mat-card>
-
-      <span *ngIf="!this.waitingForResponse && !this.invalidAttempt">*
+      <button mat-raised-button color="primary" type="submit" [disabled]="!myform.form.valid || waitingForResponse"
+        (click)="doRegister()">
+        Register
+      </button>
+      <span *ngIf="!this.waitingForResponse">*
         <span style="font-size:10px;"> All fields are mandatory</span>
       </span>
       <a routerLink="/account/login">
@@ -80,18 +66,3 @@
     </form>
   </mat-card-content>
 </mat-card>
-
-<!-- <div class=" message alert alert-danger  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="invalidAttempt"
-    style="text-align:center" role="alert">
-    <strong>Either Username is unavilable or details are not valid </strong>
-  </div>
-  <div class=" message alert alert-success  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="registered"
-    style="text-align:center" role="alert">
-    <strong>Your Account has been registerd, Login to Access your Account </strong>
-  </div>
-  <div class=" message alert alert-warning  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="wait"
-    style="text-align:center" role="alert">
-    <strong>Please wait till the Registration is Completed
-      <span style="font-size:10px;display:block;">Don't navigate from this Section</span>
-    </strong>
-  </div> -->

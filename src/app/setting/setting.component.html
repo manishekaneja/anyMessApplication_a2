@@ -57,19 +57,20 @@
         </mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit" [disabled]="!myform.form.valid"
-        (click)="doRegister()">Update</button>
-      <mat-card *ngIf="this.registerClicked && this.waitingForResponse" class="info-message-box">
+        (click)="doUpdate()">Update</button>
+      <mat-card *ngIf="this.updateButtonClicked && this.waitingForResponse" class="info-message-box">
         Please wait to know the status
       </mat-card>
-      <mat-card *ngIf="this.registerClicked && !this.waitingForResponse && !this.invalidAttempt  && !this.isRegistered"
+      <mat-card
+        *ngIf="this.updateButtonClicked && !this.waitingForResponse && !this.invalidAttempt  && !this.registered"
         class="error-message-box">
         Cant update
       </mat-card>
-      <mat-card *ngIf="this.registerClicked && !this.waitingForResponse && this.invalidAttempt  && !this.isRegistered"
+      <mat-card *ngIf="this.updateButtonClicked && !this.waitingForResponse && this.invalidAttempt  && !this.registered"
         class="error-message-box">
         Name or password in incorrect. Please try with correct credintials.
       </mat-card>
-      <mat-card *ngIf="this.registerClicked && !this.waitingForResponse && !this.invalidAttempt && this.isRegistered"
+      <mat-card *ngIf="this.updateButtonClicked && !this.waitingForResponse && !this.invalidAttempt && this.registered"
         class="success-message-box">
         Done
       </mat-card>

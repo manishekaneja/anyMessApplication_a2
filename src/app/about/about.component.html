@@ -1,4 +1,4 @@
-<mat-card class="trans-card-back mat-elevation-z0 p0">
+<mat-card class="trans-card-back mat-elevation-z0 p-0">
     <mat-card-title class="dark-back heading">
         About ME
     </mat-card-title>
@@ -11,32 +11,9 @@
         <div class="line"></div>
         <span class="heading">FAQ</span>
         <ul>
-            <li>
-                <span class="dark-back"> "Is it possible to know the identityof person who has actually sent a specific
-                    message?"</span>
-                <p>
-                    Sorry but we can't do that. The whole concept is based on being anonymous which sending message or
-                    giving feedback.
-                </p>
-            </li>
-            <li>
-                <span class="dark-back"> "Are my messages safe or do you intend to use this data somewhere
-                    else?!"</span>
-                <p>
-                    I don't intend to stealing any kind of data.
-                </p>
-            </li>
-            <li>
-                <span class="dark-back">"Can my messages be viewied by someone else?"</span>
-                <p>
-                </p>
-                    No. No one except you can see your messages.
-            </li>
-            <li>
-                <span class="dark-back">"Can I respond back to the messages?"</span>
-                <p>
-                    Sorry for this one but you can't respond back to the messages.
-                </p>
+            <li *ngFor="let item of this.list">
+                <span class="dark-back">{{item.question}}</span>
+                <p>{{item.answer}}</p>
             </li>
         </ul>
     </mat-card-content>

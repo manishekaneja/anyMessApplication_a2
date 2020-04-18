@@ -5,6 +5,14 @@
   z-index: 1000;
 }
 
+.header-color {
+  background-color: var(--secondary-color);
+}
+
+.white {
+  color: var(--light-color);
+}
+
 .header-row {
   display: flex;
   justify-content: space-between;
@@ -16,14 +24,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff !important;
+  color: var(--light-color);
   transition: 0.5s;
-  margin: 0px 2em !important;
+  margin: 0px 2rem;
+  text-shadow: var(--dark-color) 0.5px 0.7px 2px;
+  transition: 0.5s;
+}
+
+.logo:hover {
+  text-shadow: var(--dark-color) 0.5px 0.7px 10px;
 }
 
 .navbar-styles {
   display: flex;
-  color: white;
+  color: var(--light-color);
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -31,19 +45,19 @@
   align-items: stretch;
 }
 
-.navbar-styles > button,
-.navbar-styles > a {
+.navbar-styles>button, .navbar-styles>a {
   font-size: 1.1rem;
   display: inline-flex;
   color: inherit;
   height: auto;
   justify-content: stretch;
   align-items: stretch;
+  text-shadow: var(--dark-color) 0.5px 0.7px 2px;
+  transition: 0.5s;
 }
 
-.logo:hover {
-  text-shadow: black 0.5px 0.7px 5px;
-  text-decoration: none;
+.navbar-styles>button:hover, .navbar-styles>a:hover {
+  text-shadow: var(--dark-color) 0.5px 0.7px 10px;
 }
 
 .drawer-button {
@@ -54,9 +68,7 @@
   .logo {
     font-size: 1.3rem;
   }
-
-  .navbar-styles > button,
-  .navbar-styles > a {
+  .navbar-styles>button, .navbar-styles>a {
     font-size: 0.85rem;
   }
 }
@@ -65,7 +77,6 @@
   .navbar-styles {
     display: none;
   }
-
   .drawer-button {
     display: flex;
   }
@@ -73,7 +84,6 @@
 
 @media (max-width: 425px) {
   .logo {
-    margin: 0px 0.2em !important;
-    font-size: 1rem;
+    margin: 0px 0.2rem !important;
   }
 }

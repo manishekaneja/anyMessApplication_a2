@@ -1,71 +1,53 @@
-<mat-card class="flxc parent-card mat-elevation-z0">
-  <mat-card-title class="pb15 text-c title">
+<mat-card class="flxc mat-elevation-z0 parent-card p-0">
+  <mat-card-title class="pb-15 text-c title p-4">
     Get feedback from your coworkers and friends
   </mat-card-title>
   <mat-card-content>
     <div class="flxc ais">
-      <mat-card class="mb15 mat-elevation-z8 light-back">
-        <mat-card-title class="text-l">
+      <mat-card class="mb-15 mat-elevation-z8 light-back">
+        <mat-card-title class="text-c">
           At Work
         </mat-card-title>
-        <mat-list class="text-l">
-          <mat-list-item matLine>
-            <span class="left">
-              Enhance your areas of strength
-            </span>
-          </mat-list-item>
-          <mat-list-item><span class="left">
-              Strengthen Areas for Improvement
-            </span>
-          </mat-list-item>
-        </mat-list>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item matLine>
+              <span class="left">
+                Enhance your areas of strength
+              </span>
+            </mat-list-item>
+            <mat-list-item><span class="left">
+                Strengthen Areas for Improvement
+              </span>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
       </mat-card>
-      <mat-card class="mb15 mat-elevation-z8 light-back">
-        <mat-card-title class="text-r">
+      <mat-card class="mat-elevation-z8 light-back">
+        <mat-card-title class="text-c">
           With Your Friends
         </mat-card-title>
-        <mat-list>
-          <mat-list-item matLine>
-            <span class="right">
-              Improve your friendship by discovering your strengths and areas for improvement
-            </span>
-          </mat-list-item>
-          <mat-list-item matLine>
-            <span class="right">
-              Let your friends be honest with you
-            </span>
-          </mat-list-item>
-        </mat-list>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item matLine>
+              <span class="right">
+                Improve your friendship by discovering your strengths and areas for improvement
+              </span>
+            </mat-list-item>
+            <mat-list-item matLine>
+              <span class="right">
+                Let your friends be honest with you
+              </span>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
       </mat-card>
-
-      <!-- <div class="left">
-        <h3>
-          <strong>At Work</strong>
-        </h3>
-        <ul>
-          <li>Enhance your areas of strength</li>
-          <li>Strengthen Areas for Improvement</li>
-        </ul>
-
-      </div>
-
-      <div class="right">
-        <h3>
-          <strong>With Your Friends</strong>
-        </h3>
-        <ul>
-          <li>Improve your friendship by discovering your strengths and areas for improvement</li>
-          <li>Let your friends be honest with you</li>
-        </ul>
-      </div> -->
     </div>
   </mat-card-content>
-  <mat-card-footer>
-    <div class="text-c" *ngIf="!isLoggedIn">
-      <strong>
-        <a routerLink="/account/register">Register</a> |
-        <a routerLink="/account/login">Login</a>
-      </strong>
-    </div>
+  <mat-card-footer class="m-0 text-c auth-actions" *ngIf="!isLoggedIn">
+    <a routerLink="/account/register">Register</a>
+    <span> | </span>
+    <a routerLink="/account/login">Login</a>
   </mat-card-footer>
 </mat-card>

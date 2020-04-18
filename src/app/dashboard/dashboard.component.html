@@ -3,19 +3,19 @@
     <img src="" alt="nf">
   </div>
   <div class="text" style="display:block;text-align: center;font-weight:700;">
-    {{details.username}}
+    {{userData.fullname}}
   </div>
   <div class="text" style="display:block;text-align: center;font-weight:700;">
     <span class="bold">
       <span class="red"> Messages:</span>
-      {{details.messages.length}}
+      {{userData.messages.length}}
     </span>
     <span class="bold">
       <span class="red"> Fav Message :</span>
-      {{ (details.messages|getFav).length}}
+      {{ (userData.messages|getFav).length}}
     </span>
   </div>
-  <a routerLink="/user/{{details.email}}" class="bold link">{{this.ajax.URL}}/{{details.email}}
+  <a routerLink="/user/{{userData.id}}" class="bold link">{{this.baseUrl}}/{{userData.id}}
   </a>
 </mat-card>
 <mat-card class="card-back mt-10 mat-elevation-z8">
@@ -23,13 +23,13 @@
     <mat-tab-group mat-stretch-tabs>
       <mat-tab label="Received">
         <mat-card class="scroll-box">
-          <app-message-list [myList]="details.messages">
+          <app-message-list [list]="userData.messages">
           </app-message-list>
         </mat-card>
       </mat-tab>
       <mat-tab label="Favorites">
         <mat-card class="scroll-box">
-          <app-message-list [myList]="ajax.userdata.messages|getFav">
+          <app-message-list [list]="userData.messages|getFav">
           </app-message-list>
         </mat-card>
       </mat-tab>
