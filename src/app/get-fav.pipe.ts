@@ -7,9 +7,9 @@ import { Message } from './jsons/DataClasses'
 export class GetFavPipe implements PipeTransform {
 
   transform(data: Message[]): Message[] {
-    return (data && data.length > 0) ? data.filter(my => {
-      if (my.fav) {
-        return my;
+    return (data && data.length > 0) ? data.filter(message => {
+      if (message.liked) {
+        return message;
       }
     }) : [];
   }

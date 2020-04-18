@@ -1,50 +1,77 @@
-; import { Component, OnInit } from '@angular/core';
-import { AjaxCallService } from '../ajax-call.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { AjaxCallService } from "../ajax-call.service";
+import { ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
+import { ApiResponse, User, Message } from "../jsons/DataClasses";
 
 @Component({
-  selector: 'app-user-message',
-  templateUrl: './user-message.component.html',
-  styleUrls: ['./user-message.component.css']
+  selector: "app-user-message",
+  templateUrl: "./user-message.component.html",
+  styleUrls: ["./user-message.component.css"],
 })
 export class UserMessageComponent implements OnInit {
-  constructor(private ajax: AjaxCallService, private route: ActivatedRoute, private router: Router) { }
-  user: string;
-  fullname: string;
+  public userData: User;
+  public messageObject: Message;
+  public loading: boolean;
+
+  constructor(
+    private ajaxService: AjaxCallService,
+    private route: ActivatedRoute,
+    private routerInstance: Router
+  ) {
+    this.userData = new User("", "", "");
+    this.loading = true;
+    this.messageObject = new Message("", "", "");
+  }
+
   ngOnInit() {
-    this.addMessage = "";
-    this.user = this.route.snapshot.paramMap.get('username');
-    this.ajax.getUserFullName(this.user).subscribe((res) => {
-      if (res.fullName) {
-        this.fullname = res.fullName;
-      }
-      else {
-        this.router.navigate(['/error']);
-      }
-    })
+    this.loading = true;
+    this.userData = new User(
+      this.route.snapshot.paramMap.get("username"),
+      "",
+      ""
+    );
+    this.messageObject = new Message("", "", this.userData.id);
+    this.ajaxService
+      .getBasicUserDetails(this.userData.id)
+      .subscribe((response: ApiResponse): void => {
+        this.loading = false;
+        console.log(response);
+        if (response.code === 200) {
+          this.userData = User.convertToUser(response.data);
+        } else {
+          this.routerInstance.navigate(["/error"]);
+        }
+      });
   }
-  failed: boolean;
-  succ: boolean;
-  addMessage: string;
+
+  responseSuccess(response: ApiResponse): void {
+    console.log({ response });
+    delete this.messageObject;
+    this.messageObject = new Message("", "", "");
+    this.ajaxService.notify(`Delivered...`);
+  }
+  responseFailure(): void {
+    this.ajaxService.notify(`Sorry. Didn't see that coming...`);
+  }
   send() {
-    this.ajax.addMessage(this.user, this.addMessage).subscribe((res) => {
-      let result = res;
-      if (result.valid) {
-        this.succ = true;
-        setTimeout(() => {
-          this.succ = false;
-        }, 3000)
-      }
-      else {
-        this.failed = true;
-        setTimeout(() => {
-          this.failed = false;
-        }, 3000)
-      }
-    })
+    if (this.messageObject.message) {
+      this.ajaxService.sendNewMessage(this.messageObject).subscribe(
+        (response: ApiResponse): void => {
+          if ((response.code = 200)) {
+            this.responseSuccess(response);
+          } else {
+            this.responseFailure();
+          }
+        },
+        (error: Error): void => {
+          console.log({ error: error.message });
+          console.log(error);
+          this.responseFailure();
+        }
+      );
+    } else {
+      this.ajaxService.notify("Need a message to Deliver.", false);
+    }
   }
-
-
-
 }

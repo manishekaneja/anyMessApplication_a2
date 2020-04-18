@@ -1,0 +1,33 @@
+.error-message-box {
+    margin-top: 10px;
+    background-color: var(--red);
+    color: var(--light-color);
+}
+
+.info-message-box {
+    margin-top: 10px;
+    background-color: var(--blue);
+    color: var(--light-color);
+}
+
+.success-message-box {
+    margin-top: 10px;
+    background-color: var(--green);
+    color: var(--light-color);
+}
+
+.card-back {
+    background-color: var(--light-color);
+}
+
+.trans-card-back {
+    background-color: transparent;
+}
+
+.is-pointer {
+    cursor: pointer;
+}
+
+.full-height {
+    height: 100%;
+}

@@ -1,5 +1,4 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { AjaxCallService } from '../ajax-call.service';
 
 @Component({
   selector: 'app-header',

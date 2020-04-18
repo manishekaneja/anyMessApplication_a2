@@ -5,32 +5,41 @@
   max-width: 40rem;
   margin: auto;
 }
+
 .form-section {
   align-self: stretch;
   flex: 1;
 }
+
 .form-section > form {
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
+
 input {
   background-color: transparent;
 }
 
+mat-card-title > h2 {
+  font-family: "Comic Neue", cursive;
+}
+
 form > a {
-  color: #337ab7;
+  color: var(--secondary-color);
   font-weight: 900;
   text-align: center;
   padding: 0.5rem;
 }
+
 @media (max-width: 768px) {
-  .login-container {
+  .register-container {
     padding: 2rem 3rem;
   }
 }
+
 @media (max-width: 425px) {
-  .login-container {
+  .register-container {
     padding: 2rem 1rem;
     margin: 2rem 0rem;
   }
@@ -45,7 +54,8 @@ form > a {
 
 input:-webkit-autofill {
   animation: autofill;
-  -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+  -webkit-animation-delay: 1s;
+  /* Safari support - any positive time runs instantly */
   -webkit-animation-name: autofill;
   -webkit-animation-fill-mode: both;
 }

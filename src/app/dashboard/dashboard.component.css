@@ -1,5 +1,4 @@
 .scroll-box {
-  height: 400px;
   background-color: transparent;
   overflow-y: scroll;
 }
