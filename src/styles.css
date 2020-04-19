@@ -1,23 +1,24 @@
-@import url('https://fonts.googleapis.com/css?family=Comic+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Comic+Neue&display=swap");
 :root {
-  --primary-color: #E8CEAE;
-  --secondary-color: #A7A1FF;
-  --light-color: #ECECEC;
+  --primary-color: #e8ceae;
+  --secondary-color: #a7a1ff;
+  --light-color: #ececec;
   --dark-color: #323232;
-  --red: rgba(244, 67, 54, 0.7);
+  --red: rgb(202, 67, 67);
   --blue: rgb(63, 81, 181, 0.7);
   --green: rgba(38, 250, 38, 0.7);
-  font: normal 16px/1.5 'Comic Neue', cursive;
+  font: normal 16px/1.5 "Comic Neue", cursive;
 }
 
 * {
   margin: 0px;
   padding: 0px;
-  font-family: 'Comic Neue', cursive;
+  font-family: "Comic Neue", cursive;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   font: inherit;
 }
 

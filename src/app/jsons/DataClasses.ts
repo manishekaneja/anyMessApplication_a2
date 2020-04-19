@@ -14,7 +14,7 @@ export interface ApiResponse {
   code: number;
   status: string;
   messgae: string;
-  data: User;
+  data: User | Message;
 }
 
 export class User {
@@ -88,6 +88,23 @@ export class User {
       email: this._email,
       password: this._password,
     };
+  }
+  public updateMessage(messageObject: Message): void {
+    this._messages = this._messages.map(
+      (message: Message): Message => {
+        if (messageObject._id === message._id) {
+          return messageObject;
+        } else {
+          return message;
+        }
+      }
+    );
+  }
+
+  public removeMessage(messageObject: Message): void {
+    this._messages = this._messages.filter((message: Message): boolean => {
+      return message["_id"] !== messageObject["_id"];
+    });
   }
 
   public static isSame(user1: User, user2: User): boolean {

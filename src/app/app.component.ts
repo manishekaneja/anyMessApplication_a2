@@ -37,7 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (localStorage) {
       localStorage.clear();
     }
-    console.log(localStorage);
     this.routerInstance.navigate(["/account/login"]);
   }
 

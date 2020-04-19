@@ -37,7 +37,9 @@ export class RegisterComponent {
   private registerSuccess(response: ApiResponse): void {
     this.waitingForResponse = false;
     this.ajaxService.notify(
-      `${response.data.fullname} account has been registered successfully. Redirecting you to Login Screen.`,
+      `${
+        (response.data as User).fullname
+      } account has been registered successfully. Redirecting you to Login Screen.`,
       false
     );
     setTimeout((): void => {

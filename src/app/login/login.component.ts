@@ -27,10 +27,10 @@ export class LoginComponent {
   private loginSuccess(response: ApiResponse): void {
     // this.invalidAttempt = false;
     this.waitingForResponse = false;
-    this.ajaxService.setUser(response.data);
+    this.ajaxService.setUser(response.data as User);
     this.ajaxService.setToken(response.token);
     this.routerInstance.navigate(["/account/dashboard"]);
-    this.ajaxService.notify(`Welcome ${response.data.fullname}.`);
+    this.ajaxService.notify(`Welcome ${(response.data as User).fullname}.`);
   }
 
   private loginFailure(): void {

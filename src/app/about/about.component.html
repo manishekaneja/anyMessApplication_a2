@@ -1,20 +1,24 @@
 <mat-card class="trans-card-back mat-elevation-z0 p-0">
-    <mat-card-title class="dark-back heading">
-        About ME
-    </mat-card-title>
-    <mat-card-content>
-
-        <p>MessageME is a platform where you can recive messages from an anonymous person. <strong>Only thing which you
-                have
-                to do is register yourself in this Application and share the link publicly.</strong>
-            It will help you in getting some feedback.</p>
-        <div class="line"></div>
-        <span class="heading">FAQ</span>
-        <ul>
-            <li *ngFor="let item of this.list">
-                <span class="dark-back">{{item.question}}</span>
-                <p>{{item.answer}}</p>
-            </li>
-        </ul>
-    </mat-card-content>
+  <mat-card-title class="dark-back heading">
+    About ME
+  </mat-card-title>
+  <mat-card-content>
+    <p>
+      MessageME is a platform where you can recive messages from an anonymous
+      person.
+      <strong
+        >Only thing which you have to do is register yourself in this
+        Application and share the link publicly.</strong
+      >
+      It will help you in getting some feedback.
+    </p>
+    <div class="line"></div>
+    <span class="heading">FAQ</span>
+    <ul>
+      <li *ngFor="let item of this.list">
+        <span class="dark-back">{{ item.question }}</span>
+        <p>{{ item.answer }}</p>
+      </li>
+    </ul>
+  </mat-card-content>
 </mat-card>

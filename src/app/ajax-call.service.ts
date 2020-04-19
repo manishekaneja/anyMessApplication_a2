@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { User, Message, ApiResponse } from "./jsons/DataClasses";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import {
   MatSnackBar,
@@ -14,12 +14,14 @@ export class AjaxCallService {
   private _token: string;
   public isLoggedIn: boolean;
   public isUserLogedInObserver: Subject<boolean>;
+  public isUserDataObserver: Subject<User>;
 
   // readonly URL: string = "http://anonym0us.herokuapp.com/api";
   public readonly URL: string = "http://192.168.1.94:4000/api";
 
   constructor(private httpIntsance: HttpClient, private snackBar: MatSnackBar) {
     this.isUserLogedInObserver = new Subject<boolean>();
+    this.isUserDataObserver = new Subject<User>();
     this.isLoggedIn = false;
     this.userData = new User("", "", "");
     if (localStorage) {
@@ -41,6 +43,7 @@ export class AjaxCallService {
     let userObject = User.convertToUser(user);
     if (!User.isSame(this.userData, userObject)) {
       localStorage.setItem("data", JSON.stringify(userObject));
+      this.isUserDataObserver.next(userObject);
       this._userData = userObject;
     }
   }
@@ -74,6 +77,17 @@ export class AjaxCallService {
     this.setToken(str);
   }
 
+  private getHeaders(withHeader: boolean = false): HttpHeaders {
+    return new HttpHeaders({
+      "Content-Type": "application/json",
+      ...(withHeader
+        ? {
+            Authorization: `Bearer ${this.token}`,
+          }
+        : {}),
+    });
+  }
+
   public notify(
     message: string,
     closeable: boolean = true
@@ -84,16 +98,18 @@ export class AjaxCallService {
   }
 
   registerUser(userObject: User): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(false);
     return this.httpIntsance.post<ApiResponse>(
       `${this.URL}/user`,
       userObject.getRegisterDataFormat(),
       {
-        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+        headers: httpHeaders,
       }
     );
   }
 
   loginUser(userObject: User): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(false);
     return this.httpIntsance.post<ApiResponse>(
       `${this.URL}/login`,
       {
@@ -101,58 +117,52 @@ export class AjaxCallService {
         password: userObject.password,
       },
       {
-        headers: new HttpHeaders({ "Content-Type": "application/json" }),
+        headers: httpHeaders,
       }
     );
   }
 
   logoutUser(): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(true);
     return this.httpIntsance.post<ApiResponse>(
       `${this.URL}/logout`,
       {},
       {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${this.token}`,
-        }),
+        headers: httpHeaders,
       }
     );
   }
 
   getFullUserDetails(): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(true);
     return this.httpIntsance.get<ApiResponse>(`${this.URL}/user`, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.token}`,
-      }),
+      headers: httpHeaders,
     });
   }
 
   getBasicUserDetails(id: string): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(false);
     return this.httpIntsance.get<ApiResponse>(
       `${this.URL}/basicuser?userid=${id}`,
       {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-        }),
+        headers: httpHeaders,
       }
     );
   }
 
   updateUser(userObject: User): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(true);
     return this.httpIntsance.patch<ApiResponse>(
       `${this.URL}/user`,
       userObject.getRegisterDataFormat(),
       {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${this.token}`,
-        }),
+        headers: httpHeaders,
       }
     );
   }
 
   sendNewMessage(messageObject: Message) {
+    let httpHeaders = this.getHeaders(false);
     return this.httpIntsance.post<ApiResponse>(
       `${this.URL}/message`,
       {
@@ -160,53 +170,36 @@ export class AjaxCallService {
         message: messageObject.message,
       },
       {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-        }),
+        headers: httpHeaders,
       }
     );
   }
 
   updateMessage(messageObject: Message): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(true);
+
     return this.httpIntsance.patch<ApiResponse>(
       `${this.URL}/message`,
       {
-        messageid: messageObject._id,
-        liked: messageObject.liked,
+        id: messageObject._id,
       },
       {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${this.token}`,
-        }),
+        headers: httpHeaders,
       }
     );
   }
 
   //Sends token and message block and recive updated the Data Block
-  // updateMessage(mess: Message): void {
-  //   let token = localStorage.tokenID;
-  //   this.http.post(this.URL + "/manageFav", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.liked }).subscribe((res) => {
-  //     let response: any = res;
-  //     if (response.valid) {
-  //       this.setValue(response.data);
-  //     }
-  //   })
-  // }
-  //Sends token and message block and recive updated the Data Block
-  deleteMessage(messageObject: Message): void {
-    this.httpIntsance
-      .delete(this.URL + "/message", {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${this.token}`,
-        }),
-      })
-      .subscribe((res) => {
-        let response: any = res;
-        if (response.valid) {
-          this.setUser(response.data);
-        }
-      });
+  deleteMessage(messageObject: Message): Observable<ApiResponse> {
+    let httpParams = new HttpParams({
+      fromObject: {
+        id: messageObject["_id"],
+      },
+    });
+    let httpHeaders = this.getHeaders(true);
+    return this.httpIntsance.delete<ApiResponse>(this.URL + "/message", {
+      headers: httpHeaders,
+      params: httpParams,
+    });
   }
 }

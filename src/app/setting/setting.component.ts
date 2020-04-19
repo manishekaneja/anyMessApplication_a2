@@ -26,7 +26,7 @@ export class SettingComponent implements OnInit {
     this.ajaxCall.getFullUserDetails().subscribe((respose: ApiResponse) => {
       this.ajaxCall.setUser(respose.data as User);
       this.ajaxCall.setToken(respose.token);
-      this.data = respose.data;
+      this.data = User.convertToUser(respose.data as User);
     });
   }
   doUpdate(): void {
@@ -37,12 +37,11 @@ export class SettingComponent implements OnInit {
       this.ajaxCall
         .updateUser(this.data)
         .subscribe((response: ApiResponse): void => {
-          console.log({ response });
           this.waitingForResponse = false;
           this.invalidAttempt = false;
           if (response.code === 200) {
             this.registered = true;
-            this.ajaxCall.setUser(response.data);
+            this.ajaxCall.setUser(response.data as User);
             this.ajaxCall.setToken(response.token);
             this.passwordConfirmed = "";
             this.data = this.ajaxCall.userData;

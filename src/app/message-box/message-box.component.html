@@ -1,11 +1,32 @@
-<div class=" message alert" role="alert">
-  <button type="button" class="close" (click)="removeMess()" style="padding:3px;" [disabled]="data.liked"
-    aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <button type="button" [ngClass]="{'clicked':data.liked,'myclose':true}" (click)="toggleFav()" style="padding:3px;"
-    aria-label="Favourite">
-    <span class="glyphicon glyphicon-heart" style="color:grey;" aria-hidden="true"></span>
-  </button>
-  {{data.message}}
+<div>
+  <div class="flxr aic jcc message-box">
+    <div class="flx-1">
+      {{ data.message }}
+    </div>
+    <button
+      mat-icon-button
+      class="flxc jcc aic"
+      (click)="deleteMessage()"
+      [disabled]="data.liked || waitingState"
+      *ngIf="!data.liked"
+    >
+      <mat-icon class="icon tranparent-20">close</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="flxc jcc aic"
+      (click)="toggleLike()"
+      [disabled]="waitingState"
+    >
+      <mat-icon
+        [ngClass]="{
+          icon: true,
+          'tranparent-20': data.liked,
+          'tranparent-80': !data.liked
+        }"
+        >favorite</mat-icon
+      >
+    </button>
+  </div>
+  <mat-divider></mat-divider>
 </div>

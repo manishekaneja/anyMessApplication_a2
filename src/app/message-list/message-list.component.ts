@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnChanges,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 import { Message } from "../jsons/DataClasses";
 import { PageEvent } from "@angular/material/paginator";
 @Component({
@@ -7,15 +13,20 @@ import { PageEvent } from "@angular/material/paginator";
   styleUrls: ["./message-list.component.css"],
 })
 export class MessageListComponent implements OnChanges {
-  public itemPerPage: number;
-  public pageSizeOptions: Array<number>;
+  @Input() public itemPerPage: number;
   @Input() public list: Array<Message>;
+
+  @Output("update") public updateItemPerPage: EventEmitter<
+    number
+  > = new EventEmitter();
+
+  public pageSizeOptions: Array<number>;
   private startIndex: number = 0;
   private endIndex: number = 0;
 
   constructor() {
     this.list = [];
-    this.pageSizeOptions = [2, 5];
+    this.pageSizeOptions = [3, 5];
     this.itemPerPage = this.pageSizeOptions[0];
   }
   ngOnChanges() {
@@ -26,7 +37,7 @@ export class MessageListComponent implements OnChanges {
   }
 
   pageEvent(event: PageEvent): void {
-    this.itemPerPage = event.pageSize;
+    this.updateItemPerPage.emit(event.pageSize);
     this.startIndex = event.pageIndex * event.pageSize;
     this.endIndex = Math.min(
       this.startIndex + this.itemPerPage,

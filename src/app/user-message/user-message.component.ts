@@ -36,7 +36,6 @@ export class UserMessageComponent implements OnInit {
       .getBasicUserDetails(this.userData.id)
       .subscribe((response: ApiResponse): void => {
         this.loading = false;
-        console.log(response);
         if (response.code === 200) {
           this.userData = User.convertToUser(response.data);
         } else {
@@ -46,28 +45,28 @@ export class UserMessageComponent implements OnInit {
   }
 
   responseSuccess(response: ApiResponse): void {
-    console.log({ response });
     delete this.messageObject;
-    this.messageObject = new Message("", "", "");
+    this.messageObject = new Message("", "", this.userData["_id"]);
     this.ajaxService.notify(`Delivered...`);
   }
-  responseFailure(): void {
+  responseFailure(message: string): void {
+    this.messageObject.message = message;
     this.ajaxService.notify(`Sorry. Didn't see that coming...`);
   }
   send() {
+    let message: string = this.messageObject.message;
     if (this.messageObject.message) {
       this.ajaxService.sendNewMessage(this.messageObject).subscribe(
         (response: ApiResponse): void => {
           if ((response.code = 200)) {
             this.responseSuccess(response);
           } else {
-            this.responseFailure();
+            this.responseFailure(message);
           }
         },
         (error: Error): void => {
-          console.log({ error: error.message });
           console.log(error);
-          this.responseFailure();
+          this.responseFailure(message);
         }
       );
     } else {

@@ -15,7 +15,7 @@ export class HomeComponent {
     this.isLoggedIn = this.ajaxService.isLoggedIn;
     this.loginFlagSubscriber = this.ajaxService.isUserLogedInObserver.subscribe(
       (isLoggedIn) => {
-        console.log({ isLoggedIn });
+        this.isLoggedIn = isLoggedIn;
       }
     );
   }
