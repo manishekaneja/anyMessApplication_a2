@@ -2,9 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { RoutingModule } from './routing.module';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
@@ -20,11 +22,14 @@ import { UserMessageComponent } from './user-message/user-message.component';
 import { LandAtGuard } from './no-land-acc.guard';
 import { AjaxCallService } from './ajax-call.service';
 import { EqualCheckDirective } from './equal-check.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
     DashboardComponent,
     HomeComponent,
     ContactComponent,
@@ -44,9 +49,11 @@ import { EqualCheckDirective } from './equal-check.directive';
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    RoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
-  providers: [AjaxCallService,LandAtGuard],
+  providers: [AjaxCallService, LandAtGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

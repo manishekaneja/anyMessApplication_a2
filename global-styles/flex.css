@@ -1,0 +1,24 @@
+.flxr {
+  display: flex;
+  flex-direction: row;
+}
+
+.flxc {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.jcc {
+  justify-content: center;
+}
+
+.ais {
+  align-items: stretch;
+}
+
+.aic {
+  align-items: center;
+}
+.flx-1 {
+  flex: 1;
+}

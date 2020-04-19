@@ -1,44 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import { DataBlock } from '../jsons/DataClasses';
-import { AjaxCallService } from '../ajax-call.service';
+import { Component, OnInit } from "@angular/core";
+import { User, ApiResponse } from "../jsons/DataClasses";
+import { AjaxCallService } from "../ajax-call.service";
 
 @Component({
-  selector: 'app-setting',
-  templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.css', "../jsons/validation.css"]
+  selector: "app-setting",
+  templateUrl: "./setting.component.html",
+  styleUrls: ["./setting.component.css", "../jsons/validation.css"],
 })
 export class SettingComponent implements OnInit {
-  invalidAttempt = false;
-  registered = false;
-  wait = false;
-  data = new DataBlock("", "", "", "", "");
+  invalidAttempt: Boolean;
+  registered: Boolean;
+  updateButtonClicked: Boolean;
+  waitingForResponse: Boolean;
+  data: User;
+  passwordConfirmed: String;
   constructor(public ajaxCall: AjaxCallService) {
+    this.invalidAttempt = false;
+    this.registered = false;
+    this.updateButtonClicked = false;
+    this.waitingForResponse = false;
+    this.data = ajaxCall.userData;
   }
   ngOnInit() {
-    this.data = this.ajaxCall.userdata;
-    this.data.password = "";
+    this.data = this.ajaxCall.userData;
+    this.ajaxCall.getFullUserDetails().subscribe((respose: ApiResponse) => {
+      this.ajaxCall.setUser(respose.data as User);
+      this.ajaxCall.setToken(respose.token);
+      this.data = User.convertToUser(respose.data as User);
+    });
   }
   doUpdate(): void {
     this.invalidAttempt = false;
     this.registered = false;
-    this.wait = true;
-    if (this.data.cpassword === this.data.password) {
-      this.ajaxCall.doUpdate(this.data).subscribe((data) => {
-
-        let response: any = data;
-        if (response.valid == true) {
-          this.wait = false;
-          this.registered = true;
-        }
-        else {
-          this.wait = false;
-          this.invalidAttempt = true;
-        }
-      })
-
-    }
-    else {
-      this.wait = false;
+    this.waitingForResponse = true;
+    if (this.passwordConfirmed === this.data.password) {
+      this.ajaxCall
+        .updateUser(this.data)
+        .subscribe((response: ApiResponse): void => {
+          this.waitingForResponse = false;
+          this.invalidAttempt = false;
+          if (response.code === 200) {
+            this.registered = true;
+            this.ajaxCall.setUser(response.data as User);
+            this.ajaxCall.setToken(response.token);
+            this.passwordConfirmed = "";
+            this.data = this.ajaxCall.userData;
+          } else {
+            this.invalidAttempt = true;
+          }
+        });
+    } else {
+      this.waitingForResponse = false;
       this.invalidAttempt = true;
     }
   }

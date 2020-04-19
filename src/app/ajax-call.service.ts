@@ -1,79 +1,205 @@
-import { Injectable } from '@angular/core';
-import { DataBlock, Message } from './jsons/DataClasses';
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { User, Message, ApiResponse } from "./jsons/DataClasses";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Observable, Subject } from "rxjs";
+import {
+  MatSnackBar,
+  MatSnackBarRef,
+  SimpleSnackBar,
+} from "@angular/material/snack-bar";
+
 @Injectable()
 export class AjaxCallService {
-  userdata: DataBlock;
-  loggedInUser: boolean = false;
+  private _userData: User;
+  private _token: string;
+  public isLoggedIn: boolean;
+  public isUserLogedInObserver: Subject<boolean>;
+  public isUserDataObserver: Subject<User>;
 
-  setValue(data: DataBlock) {
-    this.userdata.fullName = data.fullName || this.userdata.fullName;
-    this.userdata.username = data.username || this.userdata.username;
-    this.userdata.email = data.email || this.userdata.email;
-    this.userdata.messages = data.messages || this.userdata.messages;
-    this.userdata.password = data.password || this.userdata.password;
+  // readonly URL: string = "http://anonym0us.herokuapp.com/api";
+  public readonly URL: string = "http://192.168.1.94:4000/api";
+
+  constructor(private httpIntsance: HttpClient, private snackBar: MatSnackBar) {
+    this.isUserLogedInObserver = new Subject<boolean>();
+    this.isUserDataObserver = new Subject<User>();
+    this.isLoggedIn = false;
+    this.userData = new User("", "", "");
+    if (localStorage) {
+      let localToken: string = localStorage.getItem("token");
+      if (localToken) {
+        this.token = localToken;
+        let localObject = JSON.parse(localStorage.getItem("data"));
+        this.isLoggedIn = true;
+        if (localObject) {
+          let localData: User = User.convertToUser(localObject);
+          this.userData = localData;
+        }
+      }
+    }
+    this.isUserLogedInObserver.next(this.isLoggedIn);
   }
 
-  readonly URL:string="http://anonym0us.herokuapp.com";
-
-  constructor(private http: HttpClient, private router: Router) {
-    this.userdata = new DataBlock("", "", "", "", "", [], "");
+  setUser(user: User) {
+    let userObject = User.convertToUser(user);
+    if (!User.isSame(this.userData, userObject)) {
+      localStorage.setItem("data", JSON.stringify(userObject));
+      this.isUserDataObserver.next(userObject);
+      this._userData = userObject;
+    }
   }
 
-  //Send only token and recive only boolean
-  preCheck(): Subscription {
-    return this.http.post((this.URL+"/checktoken").toString(), { 'tokenID': localStorage.tokenID }).subscribe((data) => {
-      let response: any = data;
-      this.loggedInUser = response.valid;
-      this.setValue(response.data);
+  setToken(token: string) {
+    if (token) {
+      this.isLoggedIn = true;
+      if (token !== this.token) {
+        localStorage.setItem("token", token.toString());
+        this._token = token;
+      }
+    } else {
+      this.isLoggedIn = false;
+    }
+    this.isUserLogedInObserver.next(this.isLoggedIn);
+  }
+
+  get userData(): User {
+    return this._userData;
+  }
+
+  set userData(user: User) {
+    this.setUser(user);
+  }
+
+  get token(): string {
+    return this._token;
+  }
+
+  set token(str: string) {
+    this.setToken(str);
+  }
+
+  private getHeaders(withHeader: boolean = false): HttpHeaders {
+    return new HttpHeaders({
+      "Content-Type": "application/json",
+      ...(withHeader
+        ? {
+            Authorization: `Bearer ${this.token}`,
+          }
+        : {}),
     });
   }
-  performLogOut(): void {
-    this.loggedInUser = false;
-    localStorage.clear();
-    this.router.navigate(['./account/login']);
-  }
-  //Sends token and message block and recive updated the Data Block
-  updateMessage(mess: Message): void {
-    let token = localStorage.tokenID;
-    this.http.post(this.URL+"/manageFav", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
-      let response: any = res;
-      if (response.valid) {
-        this.setValue(response.data);
-      }
-    })
-  }
-  //Sends token and message block and recive updated the Data Block
-  deleteMessage(mess: Message): void {
-    this.http.post(this.URL+"/deleteMessage", { 'tokenID': localStorage.tokenID, 'message': mess.message, 'fav': mess.fav }).subscribe((res) => {
-      let response: any = res;
-      if (response.valid) {
-        this.setValue(response.data);
-      }
-    })
-  }
-  getUserFullName(username: string): Observable<any> {
-    return this.http.post(this.URL+"/findUserName", { 'username': username });
-  }
-  addMessage(username: string, message: string): Observable<any> {
-    return this.http.post(this.URL+"/addMessage", { 'username': username, 'message': message });
-  }
-  //Send the data block and recives boolean
-  doRegister(data: DataBlock): Observable<any> {
-    return this.http.post(this.URL+"/register", data);
+
+  public notify(
+    message: string,
+    closeable: boolean = true
+  ): MatSnackBarRef<SimpleSnackBar> {
+    return this.snackBar.open(message, closeable ? "Close" : "", {
+      duration: 5000,
+    });
   }
 
-  doUpdate(data: DataBlock): Observable<any> {
-    return this.http.post(this.URL+"/updateInfo", data);
+  registerUser(userObject: User): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(false);
+    return this.httpIntsance.post<ApiResponse>(
+      `${this.URL}/user`,
+      userObject.getRegisterDataFormat(),
+      {
+        headers: httpHeaders,
+      }
+    );
   }
-  //Sends the DataBlock ( email and password) and recives only token
-  doLogin(data: DataBlock): Observable<any> {
-    return this.http.post(this.URL+"/login", { 'email': data.email, 'password': data.password });
+
+  loginUser(userObject: User): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(false);
+    return this.httpIntsance.post<ApiResponse>(
+      `${this.URL}/login`,
+      {
+        email: userObject.email,
+        password: userObject.password,
+      },
+      {
+        headers: httpHeaders,
+      }
+    );
+  }
+
+  logoutUser(): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(true);
+    return this.httpIntsance.post<ApiResponse>(
+      `${this.URL}/logout`,
+      {},
+      {
+        headers: httpHeaders,
+      }
+    );
+  }
+
+  getFullUserDetails(): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(true);
+    return this.httpIntsance.get<ApiResponse>(`${this.URL}/user`, {
+      headers: httpHeaders,
+    });
+  }
+
+  getBasicUserDetails(id: string): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(false);
+    return this.httpIntsance.get<ApiResponse>(
+      `${this.URL}/basicuser?userid=${id}`,
+      {
+        headers: httpHeaders,
+      }
+    );
+  }
+
+  updateUser(userObject: User): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(true);
+    return this.httpIntsance.patch<ApiResponse>(
+      `${this.URL}/user`,
+      userObject.getRegisterDataFormat(),
+      {
+        headers: httpHeaders,
+      }
+    );
+  }
+
+  sendNewMessage(messageObject: Message) {
+    let httpHeaders = this.getHeaders(false);
+    return this.httpIntsance.post<ApiResponse>(
+      `${this.URL}/message`,
+      {
+        sendTo: messageObject.sendTo,
+        message: messageObject.message,
+      },
+      {
+        headers: httpHeaders,
+      }
+    );
+  }
+
+  updateMessage(messageObject: Message): Observable<ApiResponse> {
+    let httpHeaders = this.getHeaders(true);
+
+    return this.httpIntsance.patch<ApiResponse>(
+      `${this.URL}/message`,
+      {
+        id: messageObject._id,
+      },
+      {
+        headers: httpHeaders,
+      }
+    );
+  }
+
+  //Sends token and message block and recive updated the Data Block
+  deleteMessage(messageObject: Message): Observable<ApiResponse> {
+    let httpParams = new HttpParams({
+      fromObject: {
+        id: messageObject["_id"],
+      },
+    });
+    let httpHeaders = this.getHeaders(true);
+    return this.httpIntsance.delete<ApiResponse>(this.URL + "/message", {
+      headers: httpHeaders,
+      params: httpParams,
+    });
   }
 }
-
-
-

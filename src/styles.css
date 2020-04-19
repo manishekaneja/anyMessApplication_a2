@@ -1,10 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
-*{
-     margin: 0px;
-     padding: 0px;
-     font-family: Signika;
-     box-sizing: border-box;
-    }
-body{
-background-color: lightgreen;
-}    
+@import url("https://fonts.googleapis.com/css?family=Comic+Neue&display=swap");
+:root {
+  --primary-color: #e8ceae;
+  --secondary-color: #a7a1ff;
+  --light-color: #ececec;
+  --dark-color: #323232;
+  --red: rgb(202, 67, 67);
+  --blue: rgb(63, 81, 181, 0.7);
+  --green: rgba(38, 250, 38, 0.7);
+  font: normal 16px/1.5 "Comic Neue", cursive;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Comic Neue", cursive;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font: inherit;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 425px) {
+  html {
+    font-size: 20px;
+  }
+}

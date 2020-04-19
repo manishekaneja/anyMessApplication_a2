@@ -1,8 +1,41 @@
-<div>
-    <header>
-        <app-header></app-header>
-    </header>
-    <div class="containEverything">
-        <router-outlet></router-outlet>
-    </div>
-</div>
+<mat-sidenav-container class="sidebar-container">
+    <mat-sidenav #sidenav class="drawer-styles side-nav-bg" position="end">
+        <mat-nav-list>
+            <a mat-list-item (click)="closeSideNavbar()" routerLink="/">
+                Home
+            </a>
+            <a mat-list-item (click)="closeSideNavbar()" routerLink="/account/login" *ngIf="!loggedIn">
+                Login
+            </a>
+            <a mat-list-item (click)="closeSideNavbar()" routerLink="/account/register" *ngIf="!loggedIn">
+                Register
+            </a>
+            <a mat-list-item (click)="closeSideNavbar()" routerLink="/account" *ngIf="loggedIn">
+                Dashboard
+            </a>
+            <a mat-list-item (click)="closeSideNavbar()" routerLink="/account/settings" *ngIf="loggedIn">
+                Setting
+            </a>
+            <a mat-list-item (click)="closeSideNavbar()" routerLink="/about">
+                AboutME
+            </a>
+            <a mat-list-item (click)="closeSideNavbar()" routerLink="/contact">
+                ContactME
+            </a>
+        </mat-nav-list>
+        <mat-divider></mat-divider>
+        <mat-action-list *ngIf="loggedIn">
+            <button mat-list-item (click)="performLogoutAction()">
+                Log Out
+            </button>
+        </mat-action-list>
+        <mat-divider *ngIf="loggedIn"></mat-divider>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-header [isLoggedIn]="loggedIn" (openDrawer)="openSideNavbar()" (performLogout)="performLogoutAction()">
+        </app-header>
+        <div class="contain-everything">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

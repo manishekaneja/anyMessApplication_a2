@@ -1,50 +1,46 @@
 <header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-          aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+  <mat-toolbar class="header-styles header-color">
+    <mat-toolbar-row class="mat-elevation-z8 header-row">
+      <div class="logo">
+        <a routerLink="/">MessageME</a>
+      </div>
+      <div class="flxr jcc ais">
+        <mat-nav-list class="navbar-styles">
+          <a mat-list-item routerLink="/">
+            Home
+          </a>
+          <a mat-list-item routerLink="/account/login" *ngIf="!this.isLoggedIn">
+            Login
+          </a>
+          <a mat-list-item routerLink="/account/register" *ngIf="!this.isLoggedIn">
+            Register
+          </a>
+          <a mat-list-item routerLink="/account" *ngIf="this.isLoggedIn">
+            Dashboard
+          </a>
+          <a mat-list-item routerLink="/account/settings" *ngIf="this.isLoggedIn">
+            Setting
+          </a>
+          <a mat-list-item routerLink="/about">
+            About ME
+          </a>
+          <a mat-list-item routerLink="/contact">
+            ContactME
+          </a>
+        </mat-nav-list>
+        <mat-action-list class="navbar-styles" *ngIf="this.isLoggedIn">
+          <button mat-list-item (click)="this.performLogout.emit()">
+            Log Out
+          </button>
+        </mat-action-list>
+      </div>
+      <div class="drawer-button">
+        <button mat-flat-button class="header-color white" (click)="this.openDrawer.emit()">
+          <mat-icon>menu</mat-icon>
         </button>
-        <a class="logo navbar-brand " routerLink="/home">MessageME</a>
       </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a routerLink="/">Home</a>
-          </li>
-          <li *ngIf="!this.ajax.loggedInUser">
-            <a routerLink="/account/login">Login</a>
-          </li>
-          <li *ngIf="!this.ajax.loggedInUser">
-            <a routerLink="/account/register">Register</a>
-          </li>
-          <li *ngIf="this.ajax.loggedInUser">
-            <a routerLink="/account">Dashboard</a>
-          </li>
-          <li *ngIf="this.ajax.loggedInUser">
-            <a routerLink="/account/settings">Setting</a>
-          </li>
-          <li *ngIf="this.ajax.loggedInUser" class="point">
-            <a (click)="removeId()">Logout</a>
-          </li>
-          <li>
-            <a routerLink="/about">About Me</a>
-          </li>
-          <li>
-            <a routerLink="/contact">ContactME</a>
-          </li>
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-  </nav>
-
-
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-toolbar class="header-color">
+  </mat-toolbar>
 </header>

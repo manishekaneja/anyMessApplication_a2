@@ -1,39 +1,24 @@
-<div>
-    <h3 class="red head">
-        About ME</h3>
-    <p>MessageME is a platform where you can recive messages from anonymous person.
-        <strong>Only thing which you have to do is make your Account Here and share the link with provided to you with others.</strong>
-        It will help you in getting Feedback.</p>
+<mat-card class="trans-card-back mat-elevation-z0 p-0">
+  <mat-card-title class="dark-back heading">
+    About ME
+  </mat-card-title>
+  <mat-card-content>
+    <p>
+      MessageME is a platform where you can recive messages from an anonymous
+      person.
+      <strong
+        >Only thing which you have to do is register yourself in this
+        Application and share the link publicly.</strong
+      >
+      It will help you in getting some feedback.
+    </p>
     <div class="line"></div>
-    <span class="head">FAQ</span>
+    <span class="heading">FAQ</span>
     <ul>
-        <li>
-            <span class="red">Will I show the identity of senders? </span>
-            <p>I won't disclose the identity of any sender to users as its all about being Anonymous.
-            </p>
-        </li>
-        <li>
-            <span class="red"> Am I a hacker?!</span>
-            <p>I am not stealing your data and don't intent to.
-            </p>
-        </li>
-        <li>
-            <span class="red">Can visitors view my messages?
-            </span>
-
-            <p>They can't
-            </p>
-
-        </li>
-        <li>
-            <span class="red">Can I respond to messages?
-            </span>
-
-            <p>Sorry for this one but you can't respond to messages.
-            </p>
-
-        </li>
-
+      <li *ngFor="let item of this.list">
+        <span class="dark-back">{{ item.question }}</span>
+        <p>{{ item.answer }}</p>
+      </li>
     </ul>
-
-</div>
+  </mat-card-content>
+</mat-card>

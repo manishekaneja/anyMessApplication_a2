@@ -1,34 +1,89 @@
-.navbar-right li a{
-    color:white;
-    transition: 0.5s;
-    margin: auto 5px;
-    font-size: 1.2em;
+.header-styles {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
 }
-.nav.navbar-nav{
-    text-align: center;
+
+.header-color {
+  background-color: var(--secondary-color);
 }
-.navbar-right li a:hover{
-    color: rgb(255, 179, 179)!important;
- }
- .navbar.navbar-default{
-    color:white!important;
-    background-color:#353535;
- }
- .logo{
-     font-size: 1.3em;
-     color: #fff!important;
-     transition: 0.5s;
-     margin: 0px 2em!important;
- }
-     @media(max-width:425px){
-        .logo{
-            margin: 0px 0.2em!important;
-        }
-        
-     }
-.logo:hover{
-    text-shadow: black 0px 0px 20px;    
+
+.white {
+  color: var(--light-color);
 }
-.point{
-    cursor:pointer;
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.logo {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--light-color);
+  transition: 0.5s;
+  margin: 0px 2rem;
+  text-shadow: var(--dark-color) 0.5px 0.7px 2px;
+  transition: 0.5s;
+}
+
+.logo:hover {
+  text-shadow: var(--dark-color) 0.5px 0.7px 10px;
+}
+
+.navbar-styles {
+  display: flex;
+  color: var(--light-color);
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.navbar-styles>button, .navbar-styles>a {
+  font-size: 1.1rem;
+  display: inline-flex;
+  color: inherit;
+  height: auto;
+  justify-content: stretch;
+  align-items: stretch;
+  text-shadow: var(--dark-color) 0.5px 0.7px 2px;
+  transition: 0.5s;
+}
+
+.navbar-styles>button:hover, .navbar-styles>a:hover {
+  text-shadow: var(--dark-color) 0.5px 0.7px 10px;
+}
+
+.drawer-button {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+  .navbar-styles>button, .navbar-styles>a {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-styles {
+    display: none;
+  }
+  .drawer-button {
+    display: flex;
+  }
+}
+
+@media (max-width: 425px) {
+  .logo {
+    margin: 0px 0.2rem !important;
+  }
 }

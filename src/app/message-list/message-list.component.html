@@ -1,3 +1,6 @@
-<div role="tabpanel" class="tab-pane active" >
-    <app-message-box *ngFor="let x of myList" [data]="x"></app-message-box>
+<div role="tabpanel" class="tab-pane active">
+    <app-message-box *ngFor="let message of getList()" [data]="message"></app-message-box>
+    <mat-paginator *ngIf="itemPerPage<list.length" class="bg-color" [length]="list.length" [pageSize]="itemPerPage"
+        [pageSizeOptions]="pageSizeOptions" (page)="pageEvent($event)">
+    </mat-paginator>
 </div>
